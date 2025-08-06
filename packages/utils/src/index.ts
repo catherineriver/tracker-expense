@@ -1,4 +1,4 @@
-export * from './formatDate';
+export { formatDate, formatCurrency } from './formatDate';
 export * from './types';
-export * from './validation';
-export * from './calculations';
+export { validateAuth, validateEmail, validateExpense, EXPENSE_CATEGORIES, validatePassword } from './validation';
+export { calculateTotal, calculateCategoryBreakdown, calculateDashboardStats, filterExpenses, sortExpenses } from './calculations';
