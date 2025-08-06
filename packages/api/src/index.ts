@@ -1,3 +1,3 @@
-import axios from 'axios';
-export const api = axios.create({ baseURL: 'https://api.example.com' });
-export const fetchUsers = () => api.get('/users');
+export * from './auth';
+export * from './expenses';
+export * from './storage';

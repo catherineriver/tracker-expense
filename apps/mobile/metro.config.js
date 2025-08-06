@@ -14,9 +14,9 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.alias = {
-    '@ui': path.resolve(workspaceRoot, 'packages/ui/src'),
-    '@utils': path.resolve(workspaceRoot, 'packages/utils/src'),
-    '@api': path.resolve(workspaceRoot, 'packages/api/src'),
+    '@ui': path.resolve(workspaceRoot, 'packages/ui'),
+    '@utils': path.resolve(workspaceRoot, 'packages/utils'),
+    '@api': path.resolve(workspaceRoot, 'packages/api'),
 };
 
 module.exports = config;
