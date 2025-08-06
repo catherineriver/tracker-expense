@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@ui": ["packages/ui/src"],
+      "@ui/*": ["packages/ui/src/*"],
+      "@utils": ["packages/utils/src"],
+      "@utils/*": ["packages/utils/src/*"],
+      "@api": ["packages/api/src"],
+      "@api/*": ["packages/api/src/*"]
+    },
+    "skipLibCheck": true,
+    "strict": true
+  }
+}
