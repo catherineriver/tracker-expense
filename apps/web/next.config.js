@@ -1,9 +1,9 @@
-const path = require('path')
+import path from 'path'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@ui', '@api', '@utils'],
-  webpack: (config, { isServer }) => {
+  webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, 'src'),
