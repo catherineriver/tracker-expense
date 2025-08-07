@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ExpensesAPI } from '@api'
+import { expensesAPI } from '@api'
 import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense, formatDate } from '@utils'
 import {getCategoryColor, getCategoryEmoji} from "@constants";
 import styles from './AddExpense.module.css'
@@ -20,7 +20,6 @@ export const AddExpense: React.FC<AddExpenseProps> = ({ onExpenseAdded }) => {
   const [errors, setErrors] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const expensesAPI = new ExpensesAPI()
 
   const handleSubmit = async () => {
     setErrors([])

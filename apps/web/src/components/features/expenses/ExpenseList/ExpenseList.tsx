@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState, useEffect, useCallback} from "react";
-import { ExpensesAPI } from '@api'
+import { expensesAPI } from '@api'
 import { Expense, ExpenseFilter } from '@utils'
 import { ExpenseCard } from '@/components/features/expenses/ExpenseCard/ExpenseCard'
 import styles from './ExpenseList.module.css'
@@ -21,7 +21,6 @@ export const ExpenseList: React.FC = () => {
   const [filter, setFilter] = useState<ExpenseFilter>({})
 
     const loadExpenses = useCallback(async () => {
-        const expensesAPI = new ExpensesAPI()
         try {
             setIsLoading(true)
             setError(null)
@@ -69,7 +68,6 @@ export const ExpenseList: React.FC = () => {
   }, [expenses, filter, applyFilters])
 
   const handleDeleteExpense = async (expenseId: string) => {
-      const expensesAPI = new ExpensesAPI()
     if (!confirm('Are you sure you want to delete this expense?')) {
       return
     }

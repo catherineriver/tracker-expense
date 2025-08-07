@@ -131,17 +131,6 @@ export class SupabaseExpensesAPI {
     }
   }
 
-  async getDashboardStats(): Promise<DashboardStats> {
-
-    try {
-      const expenses = await this.getExpenses()
-      return calculateDashboardStats(expenses)
-    } catch (error) {
-      console.error('Get dashboard stats error:', error)
-      throw new Error(error instanceof Error ? error.message : 'Failed to fetch dashboard stats')
-    }
-  }
-
   async generateShareableReport(): Promise<{ id: string; expenses: Expense[]; stats: DashboardStats }> {
     try {
       const expenses = await this.getExpenses()
@@ -149,6 +138,21 @@ export class SupabaseExpensesAPI {
 
       const userId = await this.requireAuth()
       const reportId = this.generateId()
+      
+      // Store the shared report data
+      const reportData = {
+        id: reportId,
+        expenses,
+        stats,
+        createdAt: new Date().toISOString(),
+        userId
+      }
+      
+      // Store in localStorage for now (could be moved to a Supabase table later)
+      if (typeof window !== 'undefined') {
+        const reportKey = `expense_report_${reportId}`
+        localStorage.setItem(reportKey, JSON.stringify(reportData))
+      }
 
       return { id: reportId, expenses, stats }
     } catch (error) {
@@ -158,8 +162,27 @@ export class SupabaseExpensesAPI {
   }
 
   async getSharedReport(reportId: string): Promise<{ expenses: Expense[]; stats: DashboardStats } | null> {
-    // TODO: Query shared_reports table in Supabase
-    throw new Error('Shared reports not yet implemented')
+    try {
+      // For now, retrieve from localStorage (could be moved to Supabase table later)
+      if (typeof window !== 'undefined') {
+        const reportKey = `expense_report_${reportId}`
+        const reportData = localStorage.getItem(reportKey)
+        
+        if (reportData) {
+          const parsed = JSON.parse(reportData)
+          return {
+            expenses: parsed.expenses,
+            stats: parsed.stats
+          }
+        }
+      }
+      
+      // Return null if report not found
+      return null
+    } catch (error) {
+      console.error('Get shared report error:', error)
+      return null
+    }
   }
 
   private async getExpensesForUser(userId: string, filter?: ExpenseFilter, sortBy?: 'date' | 'amount' | 'category', sortOrder?: 'asc' | 'desc'): Promise<Expense[]> {

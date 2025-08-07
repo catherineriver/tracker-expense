@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Share, Linking } from 'react-native'
 import * as Clipboard from 'expo-clipboard'
-import { ExpensesAPI } from '@api'
+import { expensesAPI } from '@api'
 
 export const ShareReport: React.FC = () => {
   const [shareUrl, setShareUrl] = useState<string | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
-  const expensesAPI = new ExpensesAPI()
 
   const generateShareableReport = async () => {
     try {

@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect, useCallback} from "react";
 import { useParams } from 'next/navigation'
-import { ExpensesAPI } from '@api'
+import { expensesAPI } from '@api'
 import { DashboardStats, Expense, formatCurrency } from '@utils'
 import { ExpenseCard } from '@/components'
 
@@ -15,7 +15,6 @@ export default function SharedReportPage() {
   const [error, setError] = useState<string | null>(null)
 
     const loadSharedReport = useCallback(async () => {
-        const expensesAPI = new ExpensesAPI()
         try {
             setIsLoading(true)
             setError(null)

@@ -1,15 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ExpensesAPI } from '@api'
+import { expensesAPI } from '@api'
 import styles from './ShareReport.module.css'
 
 export const ShareReport: React.FC = () => {
   const [shareUrl, setShareUrl] = useState<string | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
-  const expensesAPI = new ExpensesAPI()
 
   const generateShareableReport = async () => {
     try {
