@@ -50,35 +50,6 @@ export const ExpenseList: React.FC = () => {
         })
     }
 
-    const getCategoryEmoji = (category: string): string => {
-        const emojiMap: Record<string, string> = {
-            food: '🍔',
-            transport: '🚗',
-            entertainment: '🎬',
-            shopping: '🛍️',
-            bills: '💡',
-            health: '⚕️',
-            travel: '✈️',
-            other: '📝'
-        }
-        return emojiMap[category] || '📝'
-    }
-
-    const getStatusColor = () => {
-        if (error) return '#dc3545'
-        if (!isOnline) return '#fd7e14'
-        if (!isConnected) return '#ffc107'
-        return '#28a745'
-    }
-
-    const getStatusText = () => {
-        if (error) return 'Error'
-        if (!isOnline) return 'Offline'
-        if (!isConnected) return 'Connecting...'
-        if (pendingOperations > 0) return `Syncing (${pendingOperations})`
-        return 'Live'
-    }
-
     if (isLoading) {
         return (
             <View style={styles.centerContainer}>
@@ -113,18 +84,6 @@ export const ExpenseList: React.FC = () => {
                     <TouchableOpacity onPress={refresh} disabled={pendingOperations > 0}>
                         <Text style={styles.refreshButton}>🔄</Text>
                     </TouchableOpacity>
-                </View>
-
-                {/* Status indicator */}
-                <View style={[styles.statusIndicator, { borderColor: getStatusColor() }]}>
-                    <Text style={[styles.statusText, { color: getStatusColor() }]}>
-                        {getStatusText()}
-                    </Text>
-                    {lastUpdated && (
-                        <Text style={styles.lastUpdatedText}>
-                            • {formatDate(lastUpdated.toISOString())}
-                        </Text>
-                    )}
                 </View>
             </View>
 

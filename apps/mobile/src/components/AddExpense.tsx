@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native'
 import { useAdvancedRealTime } from '@api'
 import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense } from '@utils'
+import { getCategoryEmoji } from '@constants';
 
 interface RealTimeAddExpenseProps {
     onExpenseAdded?: () => void
@@ -53,30 +54,14 @@ export const AddExpense: React.FC<RealTimeAddExpenseProps> = ({ onExpenseAdded }
 
             onExpenseAdded?.()
 
-            // Show success message
             const message = isOnline
                 ? 'Expense added successfully!'
                 : 'Expense saved offline. Will sync when online.'
 
             Alert.alert('Success', message)
         } catch (error) {
-            // Error is already handled by the hook and shown in UI
             console.log('Add expense failed:', error)
         }
-    }
-
-    const getCategoryEmoji = (cat: ExpenseCategory): string => {
-        const emojiMap: Record<ExpenseCategory, string> = {
-            food: '🍔',
-            transport: '🚗',
-            entertainment: '🎬',
-            shopping: '🛍️',
-            bills: '💡',
-            health: '⚕️',
-            travel: '✈️',
-            other: '📝'
-        }
-        return emojiMap[cat]
     }
 
     const clearForm = () => {
@@ -87,34 +72,12 @@ export const AddExpense: React.FC<RealTimeAddExpenseProps> = ({ onExpenseAdded }
         setErrors([])
     }
 
-    const getConnectionStatus = () => {
-        if (!isOnline) return { text: 'Offline Mode', color: '#fd7e14', icon: '📴' }
-        if (!isConnected) return { text: 'Connecting...', color: '#ffc107', icon: '🔄' }
-        if (pendingOperations > 0) return { text: `Syncing (${pendingOperations})`, color: '#007AFF', icon: '⏳' }
-        return { text: 'Online', color: '#28a745', icon: '✅' }
-    }
-
-    const status = getConnectionStatus()
-
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             {/* Header with status */}
             <View style={styles.header}>
                 <Text style={styles.title}>Add New Expense</Text>
-                <View style={[styles.statusBadge, { borderColor: status.color }]}>
-                    <Text style={styles.statusIcon}>{status.icon}</Text>
-                    <Text style={[styles.statusText, { color: status.color }]}>
-                        {status.text}
-                    </Text>
-                </View>
             </View>
-
-            {/* Real-time error banner */}
-            {realtimeError && (
-                <View style={styles.realtimeErrorBanner}>
-                    <Text style={styles.realtimeErrorText}>⚠️ {realtimeError}</Text>
-                </View>
-            )}
 
             {/* Form validation errors */}
             {errors.length > 0 && (
@@ -358,9 +321,11 @@ const styles = StyleSheet.create({
         marginTop: 4
     },
     categoryGrid: {
+        display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 8
+        alignItems: 'center',
+        gap: 12
     },
     categoryButton: {
         backgroundColor: '#f8f9fa',
@@ -368,7 +333,8 @@ const styles = StyleSheet.create({
         borderColor: '#ddd',
         borderRadius: 8,
         padding: 12,
-        minWidth: 80,
+        width: '48%',
+        minWidth: 90,
         minHeight: 70,
         alignItems: 'center',
         justifyContent: 'center'

@@ -3,14 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Expense, formatCurrency, formatDate } from "@utils"
 import { getCategoryEmoji } from '@constants';
 
-type Props = {
+type ExpenseCardProps = {
     expense: Expense
     onPress?: () => void
     onEdit?: () => void
     onDelete?: () => void
 }
 
-export const ExpenseCard: React.FC<Props> = ({ 
+export const ExpenseCard: React.FC<ExpenseCardProps> = ({
     expense, 
     onPress, 
     onEdit, 

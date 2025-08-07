@@ -8,73 +8,10 @@ import {
     StyleSheet,
     RefreshControl
 } from 'react-native';
-import { useAdvancedRealTime } from '../../../../packages/api/src/hooks/useAdvancedRealTime';
-import { formatCurrency } from '../../../../packages/utils/src';
+import { useAdvancedRealTime } from '@api/src/hooks/useAdvancedRealTime';
+import { formatCurrency } from '@utils';
 import { ExpenseCard } from './ExpenseCard';
 
-interface RealTimeStatusProps {
-    isConnected: boolean;
-    isOnline: boolean;
-    lastUpdated: Date | null;
-    pendingOperations: number;
-    error?: string | null;
-}
-
-const RealTimeStatus: React.FC<RealTimeStatusProps> = ({
-   isConnected,
-   isOnline,
-   lastUpdated,
-   pendingOperations,
-   error
-}) => {
-    const getStatusColor = () => {
-        if (error) return '#dc3545'
-        if (!isOnline) return '#fd7e14'
-        if (!isConnected) return '#ffc107'
-        return '#28a745'
-    }
-
-    const getStatusText = () => {
-        if (error) return 'Error'
-        if (!isOnline) return 'Offline'
-        if (!isConnected) return 'Connecting...'
-        if (pendingOperations > 0) return `Syncing (${pendingOperations})`
-        return 'Live'
-    }
-
-    const getStatusIcon = () => {
-        if (error) return '❌'
-        if (!isOnline) return '📴'
-        if (!isConnected) return '🔄'
-        if (pendingOperations > 0) return '⏳'
-        return '✅'
-    }
-
-    const formatLastUpdated = () => {
-        if (!lastUpdated) return ''
-
-        const now = new Date()
-        const diff = now.getTime() - lastUpdated.getTime()
-
-        if (diff < 60000) return 'Just now'
-        if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`
-        return `${Math.floor(diff / 3600000)}h ago`
-    }
-
-    return (
-        <View style={[styles.statusContainer, { borderColor: getStatusColor() }]}>
-            <Text style={{ fontSize: 12 }}>{getStatusIcon()}</Text>
-            <Text style={[styles.statusText, { color: getStatusColor() }]}>
-                {getStatusText()}
-            </Text>
-            {lastUpdated && (
-                <Text style={styles.lastUpdatedText}>
-                    • {formatLastUpdated()}
-                </Text>
-            )}
-        </View>
-    )
-}
 
 export const Dashboard: React.FC = () => {
     const {
@@ -137,15 +74,6 @@ export const Dashboard: React.FC = () => {
                 <RefreshControl refreshing={pendingOperations > 0} onRefresh={refresh} />
             }
         >
-            {/* Real-time Status */}
-            <RealTimeStatus
-                isConnected={isConnected}
-                isOnline={isOnline}
-                lastUpdated={lastUpdated}
-                pendingOperations={pendingOperations}
-                error={error}
-            />
-
             <Text style={styles.title}>Dashboard</Text>
 
             {/* Error Banner */}

@@ -1,0 +1,90 @@
+/* Expense Card Component Styles */
+.expenseCard {
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.expenseCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+
+.description {
+  font-size: 16px;
+  color: var(--foreground);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--secondary-color);
+}
+
+.date {
+  color: var(--secondary-color);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Optimistic update states */
+.optimisticCard {
+  opacity: 0.7;
+  border: 2px dashed var(--primary-color);
+  background: rgba(0, 122, 255, 0.05);
+}
+
+.optimisticCard::after {
+  content: '⏳ Syncing...';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--primary-color);
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .expenseCard {
+    padding: 20px;
+  }
+
+  .amount {
+    font-size: 24px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+}
