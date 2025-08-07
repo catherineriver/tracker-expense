@@ -141,6 +141,9 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
     devDependencies:
+      '@utils':
+        specifier: '*'
+        version: link:../utils
       typescript:
         specifier: ^5.9.2
         version: 5.9.2

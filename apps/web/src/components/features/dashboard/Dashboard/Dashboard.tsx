@@ -1,7 +1,7 @@
 import React from 'react';
-import { formatCurrency } from '@utils';
-import { useAdvancedRealTimeWeb } from '@api';
-import styles from './Dashboard.module.css';
+import { Expense, formatCurrency} from "@utils";
+import {useAdvancedRealTimeWeb} from "@api";
+import styles from "./Dashboard.module.css";
 import {ShareReport} from "@/components/features/reports";
 import {PageTitle} from "@/components/ui/PageTitle/PageTitle";
 import {Section} from "@/components/layout/Section/Section";
@@ -15,57 +15,57 @@ import {Card} from "@/components/ui/Card/Card";
 import {PageLayout} from "@/components/layout/PageLayout/PageLayout";
 
 export const Dashboard: React.FC = () => {
-  const {
-    dashboardStats,
-    isLoading,
-    error,
-    refresh
-  } = useAdvancedRealTimeWeb({ enableOptimisticUpdates: true });
+    const {
+        dashboardStats,
+        isLoading,
+        error,
+        refresh
+    } = useAdvancedRealTimeWeb({enableOptimisticUpdates: true});
 
-  if (isLoading) {
-    return (
-      <Loading text={'Loading dashboard...'} />
-    );
-  }
+    if (isLoading) {
+        return (
+            <Loading text={"Loading dashboard..."}/>
+        );
+    }
 
     if (error) {
         return (
-            <Error message={error} onRetry={refresh} />
-        )
+            <Error message={error} onRetry={refresh}/>
+        );
     }
 
-  if (!dashboardStats) {
+    if (!dashboardStats) {
+        return (
+            <EmptyState
+                title="Welcome to Expense Tracker"
+                subtitle="Start by adding your first expense!"
+            />
+
+        );
+    }
+
     return (
-        <EmptyState
-            title="Welcome to Expense Tracker"
-            subtitle="Start by adding your first expense!"
-        />
-
-    );
-  }
-
-  return (
-    <PageLayout>
-      <PageTitle>Dashboard</PageTitle>
-        <Card>
-            <Currency amount={formatCurrency(dashboardStats.totalAmount)} />
-            <div className={styles.summaryLabel}>Total Spent</div>
-        </Card>
+        <PageLayout>
+            <PageTitle>Dashboard</PageTitle>
+            <Card>
+                <Currency amount={formatCurrency(dashboardStats.totalAmount)}/>
+                <div className={styles.summaryLabel}>Total Spent</div>
+            </Card>
 
 
-      {dashboardStats.categoryBreakdown.length > 0 && (
-          <Section title="Spending by Category">
-              <Graph
-                  categories={dashboardStats.categoryBreakdown}
-                  totalAmount={dashboardStats.totalAmount}
-              />
-          </Section>
-      )}
+            {dashboardStats.categoryBreakdown.length > 0 && (
+                <Section title="Spending by Category">
+                    <Graph
+                        categories={dashboardStats.categoryBreakdown}
+                        totalAmount={dashboardStats.totalAmount}
+                    />
+                </Section>
+            )}
 
-    {dashboardStats.recentExpenses.length > 0 && (
-        <Section title="Recent Expenses">
-            <div className={styles.list}>
-            {dashboardStats.recentExpenses.map((expense) => (
+            {dashboardStats.recentExpenses.length > 0 && (
+                <Section title="Recent Expenses">
+                    <div className={styles.list}>
+                        {dashboardStats.recentExpenses.map((expense: Expense) => (
                 <ExpenseItem key={expense.id} expense={expense} />
             ))}
             </div>

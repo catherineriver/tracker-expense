@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect, useCallback} from "react";
 import { ExpensesAPI } from '@api'
 import { Expense, ExpenseFilter } from '@utils'
 import { ExpenseCard } from '@/components/features/expenses/ExpenseCard/ExpenseCard'
@@ -20,56 +20,56 @@ export const ExpenseList: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false)
   const [filter, setFilter] = useState<ExpenseFilter>({})
 
-  const expensesAPI = new ExpensesAPI()
+    const loadExpenses = useCallback(async () => {
+        const expensesAPI = new ExpensesAPI()
+        try {
+            setIsLoading(true)
+            setError(null)
+            const expenseList = await expensesAPI.getExpenses(undefined, 'date', 'desc')
+            setExpenses(expenseList)
+        } catch {
+            setError('Failed to load expenses')
+        } finally {
+            setIsLoading(false)
+        }
+    }, []);
+
+    const applyFilters = useCallback(async () => {
+        let filtered = [...expenses]
+
+        if (filter.category) {
+            filtered = filtered.filter(expense => expense.category === filter.category)
+        }
+
+        if (filter.startDate) {
+            filtered = filtered.filter(expense => expense.date >= filter.startDate!)
+        }
+
+        if (filter.endDate) {
+            filtered = filtered.filter(expense => expense.date <= filter.endDate!)
+        }
+
+        if (filter.minAmount) {
+            filtered = filtered.filter(expense => expense.amount >= filter.minAmount!)
+        }
+
+        if (filter.maxAmount) {
+            filtered = filtered.filter(expense => expense.amount <= filter.maxAmount!)
+        }
+
+        setFilteredExpenses(filtered)
+    }, [expenses, filter.category, filter.endDate, filter.maxAmount, filter.minAmount, filter.startDate]);
 
   useEffect(() => {
     loadExpenses()
-  }, [])
+  }, [loadExpenses])
 
   useEffect(() => {
     applyFilters()
-  }, [expenses, filter])
-
-  const loadExpenses = async () => {
-    try {
-      setIsLoading(true)
-      setError(null)
-      const expenseList = await expensesAPI.getExpenses(undefined, 'date', 'desc')
-      setExpenses(expenseList)
-    } catch (err) {
-      setError('Failed to load expenses')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const applyFilters = () => {
-    let filtered = [...expenses]
-
-    if (filter.category) {
-      filtered = filtered.filter(expense => expense.category === filter.category)
-    }
-
-    if (filter.startDate) {
-      filtered = filtered.filter(expense => expense.date >= filter.startDate!)
-    }
-
-    if (filter.endDate) {
-      filtered = filtered.filter(expense => expense.date <= filter.endDate!)
-    }
-
-    if (filter.minAmount) {
-      filtered = filtered.filter(expense => expense.amount >= filter.minAmount!)
-    }
-
-    if (filter.maxAmount) {
-      filtered = filtered.filter(expense => expense.amount <= filter.maxAmount!)
-    }
-
-    setFilteredExpenses(filtered)
-  }
+  }, [expenses, filter, applyFilters])
 
   const handleDeleteExpense = async (expenseId: string) => {
+      const expensesAPI = new ExpensesAPI()
     if (!confirm('Are you sure you want to delete this expense?')) {
       return
     }

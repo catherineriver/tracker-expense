@@ -46,7 +46,6 @@ export const AddExpense: React.FC<RealTimeAddExpenseProps> = ({ onExpenseAdded }
         try {
             await createExpense(expenseData)
 
-            // Reset form
             setAmount('')
             setCategory('other')
             setDescription('')
@@ -74,12 +73,10 @@ export const AddExpense: React.FC<RealTimeAddExpenseProps> = ({ onExpenseAdded }
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            {/* Header with status */}
             <View style={styles.header}>
                 <Text style={styles.title}>Add New Expense</Text>
             </View>
 
-            {/* Form validation errors */}
             {errors.length > 0 && (
                 <View style={styles.errorCard}>
                     {errors.map((error, index) => (

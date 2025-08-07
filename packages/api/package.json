@@ -9,6 +9,7 @@
     "axios": "^1.11.0"
   },
   "devDependencies": {
+    "@utils":"*",
     "typescript": "^5.9.2"
   },
   "private": true

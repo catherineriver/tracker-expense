@@ -53,9 +53,9 @@ export const ShareReport: React.FC = () => {
         text: 'Check out my expense report',
         url: shareUrl
       })
-    } catch (err) {
+    } catch {
       // User cancelled sharing or error occurred
-      console.log('Share cancelled or failed:', err)
+      console.log('Share cancelled or failed')
     }
   }
 

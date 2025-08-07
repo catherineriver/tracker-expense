@@ -29,7 +29,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onLogout }) => {
     }
 
     loadUser()
-  }, [])
+  }, [authAPI])
 
   const handleLogout = async () => {
     await authAPI.logout()

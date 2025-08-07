@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Platform } from 'react-native'
 import { Expense, CreateExpenseRequest, UpdateExpenseRequest, DashboardStats } from '@utils'
 import { SupabaseExpensesAPI } from '../supabase-expenses'
 import { AuthAPI } from '../auth'
@@ -331,38 +330,6 @@ export const useAdvancedRealTime = (
 
     return cleanup
   }, [initialize, cleanup, enableNotifications])
-
-  // Online/offline detection
-    useEffect(() => {
-        const handleOnline = () => { /* ... */ }
-        const handleOffline = () => { /* ... */ }
-
-        if (Platform.OS === 'web') {
-            setIsOnline(navigator.onLine)
-            window.addEventListener('online', handleOnline)
-            window.addEventListener('offline', handleOffline)
-            return () => {
-                window.removeEventListener('online', handleOnline)
-                window.removeEventListener('offline', handleOffline)
-            }
-        } else {
-            let unsubscribe: (() => void) | undefined;
-            import('@react-native-community/netinfo').then(NetInfo => {
-                unsubscribe = NetInfo.default.addEventListener(state => {
-                    setIsOnline(state.isConnected ?? true)
-                    setIsConnected(state.isConnected ?? true)
-                    if (state.isConnected) {
-                        processOfflineQueue()
-                        refresh()
-                    }
-                })
-            })
-
-            return () => {
-                if (unsubscribe) unsubscribe()
-            }
-        }
-    }, [processOfflineQueue, refresh])
 
   return {
     expenses,

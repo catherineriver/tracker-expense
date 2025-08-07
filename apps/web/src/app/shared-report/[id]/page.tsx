@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect, useCallback} from "react";
 import { useParams } from 'next/navigation'
 import { ExpensesAPI } from '@api'
 import { DashboardStats, Expense, formatCurrency } from '@utils'
@@ -14,32 +14,33 @@ export default function SharedReportPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const expensesAPI = new ExpensesAPI()
+    const loadSharedReport = useCallback(async () => {
+        const expensesAPI = new ExpensesAPI()
+        try {
+            setIsLoading(true)
+            setError(null)
 
-  useEffect(() => {
-    if (reportId) {
-      loadSharedReport()
-    }
-  }, [reportId])
+            const report = await expensesAPI.getSharedReport(reportId)
+            if (!report) {
+                setError('Report not found or has expired')
+                return
+            }
 
-  const loadSharedReport = async () => {
-    try {
-      setIsLoading(true)
-      setError(null)
-      
-      const report = await expensesAPI.getSharedReport(reportId)
-      if (!report) {
-        setError('Report not found or has expired')
-        return
-      }
-      
-      setReportData(report)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load report')
-    } finally {
-      setIsLoading(false)
-    }
-  }
+            setReportData(report)
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Failed to load report')
+        } finally {
+            setIsLoading(false)
+        }
+    }, [reportId], )
+
+    useEffect(() => {
+        if (reportId) {
+            loadSharedReport()
+        }
+    }, [reportId, loadSharedReport])
+
+
 
   if (isLoading) {
     return (

@@ -8,7 +8,6 @@ import {
   Dashboard,
   ExpenseList,
   AddExpense,
-  ShareReport
 } from '@/components'
 import styles from './page.module.css'
 
