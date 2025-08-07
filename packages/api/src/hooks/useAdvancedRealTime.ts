@@ -53,7 +53,7 @@ export const useAdvancedRealTime = (
 
   // Refs
   const expensesAPI = useRef(new SupabaseExpensesAPI())
-  const authAPI = useRef(new AuthAPI())
+  const authAPI = useRef(AuthAPI.getInstance())
   const subscriptionRef = useRef<any>(null)
   const pollIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const offlineQueue = useRef<Array<{ action: string, data: any }>>([])

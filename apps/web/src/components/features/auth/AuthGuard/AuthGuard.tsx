@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState, useEffect, useCallback} from "react";
-import { AuthAPI } from '@api'
+import { authAPI } from '@api'
 import { AuthForm } from "@/components/features/auth/AuthForm/AuthForm"
 import styles from './AuthGuard.module.css'
 
@@ -14,7 +14,6 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
 
     const checkAuth = useCallback(async () => {
-        const authAPI = new AuthAPI()
         const authenticated = authAPI.isAuthenticated()
         setIsAuthenticated(await authenticated)
         setIsLoading(false)

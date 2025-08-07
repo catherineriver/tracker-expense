@@ -1,6 +1,5 @@
 // Export main implementations
 export { AuthAPI } from './auth'
-export { ExpensesAPI as LocalExpensesAPI } from './expenses'
 export { SupabaseExpensesAPI } from './supabase-expenses'
 export { supabase, isSupabaseConfigured } from './supabase'
 
@@ -13,7 +12,13 @@ import { AuthAPI } from './auth'
 import { SupabaseExpensesAPI } from './supabase-expenses'
 export const ExpensesAPI = SupabaseExpensesAPI
 
+// Export singleton instances for convenience
+export const authAPI = AuthAPI.getInstance()
+export const expensesAPI = new SupabaseExpensesAPI()
+
 export default {
   AuthAPI,
-  ExpensesAPI
+  ExpensesAPI,
+  authAPI,
+  expensesAPI
 }

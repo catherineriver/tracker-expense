@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { AuthAPI } from '@api'
+import { authAPI } from '@api'
 import { User } from '@utils'
 import styles from './Navigation.module.css'
 
@@ -14,7 +14,6 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({ onLogout }) => {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const authAPI = new AuthAPI()
 
   useEffect(() => {
     const loadUser = async () => {
@@ -29,7 +28,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onLogout }) => {
     }
 
     loadUser()
-  }, [authAPI])
+  }, [])
 
   const handleLogout = async () => {
     await authAPI.logout()

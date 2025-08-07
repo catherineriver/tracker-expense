@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
-import { AuthAPI } from '@api'
+import { authAPI } from '@api'
 
 interface AuthFormProps {
   onSuccess: () => void
@@ -13,7 +13,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
   const [name, setName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const authAPI = new AuthAPI()
 
   const handleSubmit = async () => {
     if (!email || !password || (!isLogin && !name)) {

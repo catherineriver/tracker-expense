@@ -16,7 +16,7 @@ async function testSupabaseSetup() {
   console.log('')
 
   if (!isSupabaseConfigured()) {
-    console.log('⚠️  Supabase not configured. Tests will use local fallback.')
+    console.log('⚠️  Supabase not configured. Please set up Supabase to use this application.')
     console.log('   To configure Supabase:')
     console.log('   1. Copy .env.example to .env.local')
     console.log('   2. Add your Supabase URL and API key')
@@ -40,7 +40,7 @@ async function testSupabaseSetup() {
 
     // Test 3: Auth API
     console.log('3. Authentication API:')
-    const authAPI = new AuthAPI()
+    const authAPI = AuthAPI.getInstance()
     
     try {
       const isAuth = await authAPI.isAuthenticated()

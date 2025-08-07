@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
-import { AuthAPI } from '../../../../packages/api'
+import { authAPI } from '../../../../packages/api'
 import { AuthForm } from './AuthForm'
 
 interface AuthContextType {
@@ -26,7 +26,6 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children, onLogout }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  const authAPI = new AuthAPI()
 
   useEffect(() => {
     const checkAuth = async () => {

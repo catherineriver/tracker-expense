@@ -1,61 +1,15 @@
 import { supabase } from './supabase'
 import { User, AuthRequest, AuthResponse, validateAuth } from '../../utils/src'
-import { ExpenseStorage } from './storage'
 
 export class AuthAPI {
-  private storage = new ExpenseStorage()
+  private static instance: AuthAPI | null = null
 
-  private generateId(): string {
-    return Math.random().toString(36).substring(2) + Date.now().toString(36);
-  }
-
-  private generateToken(): string {
-    return Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
-  }
-
-  // Local auth fallback methods
-  private async loginLocal(request: AuthRequest): Promise<AuthResponse> {
-    const user: User = {
-      id: this.generateId(),
-      email: request.email,
-      name: request.email.split('@')[0],
-      createdAt: new Date().toISOString()
+  static getInstance(): AuthAPI {
+    if (!AuthAPI.instance) {
+      AuthAPI.instance = new AuthAPI()
     }
-    
-    const token = this.generateToken()
-    await this.storage.saveUser(user, token)
-    
-    return { user, token }
+    return AuthAPI.instance
   }
-
-  private async registerLocal(request: AuthRequest & { name: string }): Promise<AuthResponse> {
-    const user: User = {
-      id: this.generateId(),
-      email: request.email,
-      name: request.name,
-      createdAt: new Date().toISOString()
-    }
-    
-    const token = this.generateToken()
-    await this.storage.saveUser(user, token)
-    await this.storage.saveRegisteredUser(user)
-    
-    return { user, token }
-  }
-
-  private async getCurrentUserLocal(): Promise<User | null> {
-    return await this.storage.getUser()
-  }
-
-  private async logoutLocal(): Promise<void> {
-    await this.storage.logout()
-  }
-
-  private async isAuthenticatedLocal(): Promise<boolean> {
-    const token = await this.storage.getToken()
-    return !!token
-  }
-
   async login(request: AuthRequest): Promise<AuthResponse> {
     const validation = validateAuth(request)
     if (!validation.valid) {

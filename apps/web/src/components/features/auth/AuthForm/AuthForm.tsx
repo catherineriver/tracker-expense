@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { AuthAPI } from '@api'
+import { authAPI } from '@api'
 import { validateAuth } from '@utils'
 import { Button } from "@/components/ui/Button/Button"
 import { BaseInput } from '@/components/ui/inputs/BaseInput/BaseInput'
@@ -19,7 +19,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
     const [errors, setErrors] = useState<string[]>([])
     const [isLoading, setIsLoading] = useState(false)
 
-    const authAPI = new AuthAPI()
 
     const handleSubmit = async () => {
         setErrors([])

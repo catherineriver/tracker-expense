@@ -10,11 +10,8 @@ import {
   calculateDashboardStats,
   sortExpenses
 } from '../../utils/src'
-// Fallback to local storage if Supabase is not configured
-import { ExpensesAPI as LocalExpensesAPI } from './expenses'
 
 export class SupabaseExpensesAPI {
-  private localAPI = new LocalExpensesAPI()
 
   private async requireAuth(): Promise<string> {
     const { data: { user }, error } = await supabase.auth.getUser()
@@ -26,19 +23,6 @@ export class SupabaseExpensesAPI {
     return user.id
   }
 
-  private async checkAuth(): Promise<string | null> {
-    try {
-      const { data: { user }, error } = await supabase.auth.getUser()
-      
-      if (error || !user) {
-        return null
-      }
-      
-      return user.id
-    } catch (error) {
-      return null
-    }
-  }
 
   async createExpense(request: CreateExpenseRequest): Promise<Expense> {
     const validation = validateExpense(request)
@@ -47,13 +31,7 @@ export class SupabaseExpensesAPI {
     }
 
     try {
-      const userId = await this.checkAuth()
-      
-      // If not authenticated, fall back to local storage
-      if (!userId) {
-        console.log('User not authenticated, creating expense in local storage')
-        return this.localAPI.createExpense(request)
-      }
+      const userId = await this.requireAuth()
       
       const { data, error } = await supabase
         .from('expenses')
@@ -74,65 +52,23 @@ export class SupabaseExpensesAPI {
       return this.mapSupabaseExpense(data)
     } catch (error) {
       console.error('Create expense error:', error)
-      // If Supabase fails, try to fall back to local storage
-      console.log('Supabase failed, creating expense in local storage')
-      return this.localAPI.createExpense(request)
+      throw new Error(error instanceof Error ? error.message : 'Failed to create expense')
     }
   }
 
   async getExpenses(filter?: ExpenseFilter, sortBy?: 'date' | 'amount' | 'category', sortOrder?: 'asc' | 'desc'): Promise<Expense[]> {
     try {
-      const userId = await this.checkAuth()
-      
-      // If not authenticated, fall back to local storage
-      if (!userId) {
-        console.log('User not authenticated, falling back to local storage')
-        return this.localAPI.getExpenses(filter, sortBy, sortOrder)
-      }
-      
-      let query = supabase
-        .from('expenses')
-        .select('*')
-        .eq('user_id', userId)
-
-      // Apply sorting at database level for better performance
-      if (sortBy) {
-        const supabaseColumn = sortBy === 'date' ? 'created_at' : sortBy
-        query = query.order(supabaseColumn, { ascending: sortOrder === 'asc' })
-      } else {
-        // Default sorting by creation date, newest first
-        query = query.order('created_at', { ascending: false })
-      }
-
-      const { data, error } = await query
-
-      if (error) throw error
-      
-      let expenses = data.map(this.mapSupabaseExpense)
-
-      // Apply filters on client side (could be moved to database for better performance)
-      if (filter) {
-        expenses = filterExpenses(expenses, filter)
-      }
-
-      return expenses
+      const userId = await this.requireAuth()
+      return await this.getExpensesForUser(userId, filter, sortBy, sortOrder)
     } catch (error) {
       console.error('Get expenses error:', error)
-      // If Supabase fails, try to fall back to local storage
-      console.log('Supabase failed, falling back to local storage')
-      return this.localAPI.getExpenses(filter, sortBy, sortOrder)
+      throw new Error(error instanceof Error ? error.message : 'Failed to fetch expenses')
     }
   }
 
   async updateExpense(request: UpdateExpenseRequest): Promise<Expense> {
     try {
-      const userId = await this.checkAuth()
-      
-      // If not authenticated, fall back to local storage
-      if (!userId) {
-        console.log('User not authenticated, updating expense in local storage')
-        return this.localAPI.updateExpense(request)
-      }
+      const userId = await this.requireAuth()
 
       // Validate the update data
       if (request.amount !== undefined || request.category || request.description || request.date) {
@@ -174,21 +110,13 @@ export class SupabaseExpensesAPI {
       return this.mapSupabaseExpense(data)
     } catch (error) {
       console.error('Update expense error:', error)
-      // If Supabase fails, try to fall back to local storage
-      console.log('Supabase failed, updating expense in local storage')
-      return this.localAPI.updateExpense(request)
+      throw new Error(error instanceof Error ? error.message : 'Failed to update expense')
     }
   }
 
   async deleteExpense(id: string): Promise<void> {
     try {
-      const userId = await this.checkAuth()
-      
-      // If not authenticated, fall back to local storage
-      if (!userId) {
-        console.log('User not authenticated, deleting expense from local storage')
-        return this.localAPI.deleteExpense(id)
-      }
+      const userId = await this.requireAuth()
       
       const { error } = await supabase
         .from('expenses')
@@ -199,9 +127,7 @@ export class SupabaseExpensesAPI {
       if (error) throw error
     } catch (error) {
       console.error('Delete expense error:', error)
-      // If Supabase fails, try to fall back to local storage
-      console.log('Supabase failed, deleting expense from local storage')
-      return this.localAPI.deleteExpense(id)
+      throw new Error(error instanceof Error ? error.message : 'Failed to delete expense')
     }
   }
 
@@ -220,26 +146,9 @@ export class SupabaseExpensesAPI {
     try {
       const expenses = await this.getExpenses()
       const stats = calculateDashboardStats(expenses)
-      
-      const reportId = this.generateId()
-      
-      // Store the shareable report in Supabase (you might want to create a separate table for this)
-      // For now, we'll use the same approach as the local API
-      const reportKey = `expense_report_${reportId}`
-      const userId = await this.checkAuth()
-      const reportData = {
-        id: reportId,
-        expenses,
-        stats,
-        createdAt: new Date().toISOString(),
-        userId: userId || 'anonymous'
-      }
 
-      // You could store this in a separate 'shared_reports' table for better organization
-      // For now, using localStorage as fallback
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(reportKey, JSON.stringify(reportData))
-      }
+      const userId = await this.requireAuth()
+      const reportId = this.generateId()
 
       return { id: reportId, expenses, stats }
     } catch (error) {
@@ -249,26 +158,37 @@ export class SupabaseExpensesAPI {
   }
 
   async getSharedReport(reportId: string): Promise<{ expenses: Expense[]; stats: DashboardStats } | null> {
-    // This would typically query a 'shared_reports' table
-    // For now, falling back to localStorage
-    try {
-      if (typeof window !== 'undefined') {
-        const reportKey = `expense_report_${reportId}`
-        const reportData = localStorage.getItem(reportKey)
-        
-        if (reportData) {
-          const parsed = JSON.parse(reportData)
-          return {
-            expenses: parsed.expenses,
-            stats: parsed.stats
-          }
-        }
-      }
-      return null
-    } catch (error) {
-      console.error('Get shared report error:', error)
-      return null
+    // TODO: Query shared_reports table in Supabase
+    throw new Error('Shared reports not yet implemented')
+  }
+
+  private async getExpensesForUser(userId: string, filter?: ExpenseFilter, sortBy?: 'date' | 'amount' | 'category', sortOrder?: 'asc' | 'desc'): Promise<Expense[]> {
+    let query = supabase
+      .from('expenses')
+      .select('*')
+      .eq('user_id', userId)
+
+    // Apply sorting at database level for better performance
+    if (sortBy) {
+      const supabaseColumn = sortBy === 'date' ? 'created_at' : sortBy
+      query = query.order(supabaseColumn, { ascending: sortOrder === 'asc' })
+    } else {
+      // Default sorting by creation date, newest first
+      query = query.order('created_at', { ascending: false })
     }
+
+    const { data, error } = await query
+
+    if (error) throw error
+    
+    let expenses = data.map(this.mapSupabaseExpense)
+
+    // Apply filters on client side (could be moved to database for better performance)
+    if (filter) {
+      expenses = filterExpenses(expenses, filter)
+    }
+
+    return expenses
   }
 
   // Real-time subscription method
@@ -276,18 +196,8 @@ export class SupabaseExpensesAPI {
     let userId: string | null = null
 
     // Get the current user ID
-    this.checkAuth().then(id => {
+    this.requireAuth().then(id => {
       userId = id
-
-      // If not authenticated, just return empty subscription
-      if (!userId) {
-        console.log('User not authenticated, skipping real-time subscription')
-        return { 
-          unsubscribe: () => {
-            // No-op
-          }
-        }
-      }
 
       const channel = supabase
         .channel('expenses-changes')
@@ -299,9 +209,9 @@ export class SupabaseExpensesAPI {
             filter: `user_id=eq.${userId}`
           },
           async () => {
-            // When any change occurs, fetch the latest expenses
+            // When any change occurs, fetch the latest expenses without auth check
             try {
-              const expenses = await this.getExpenses()
+              const expenses = await this.getExpensesForUser(userId!)
               callback(expenses)
             } catch (error) {
               console.error('Error fetching expenses after real-time update:', error)
