@@ -11,11 +11,11 @@ interface UseAdvancedRealTimeOptions {
 }
 
 interface UseAdvancedRealTimeReturn {
-  // Data
+
   expenses: Expense[]
   dashboardStats: DashboardStats | null
 
-  // Status
+
   isLoading: boolean
   isConnected: boolean
   isOnline: boolean
@@ -23,7 +23,7 @@ interface UseAdvancedRealTimeReturn {
   lastUpdated: Date | null
   pendingOperations: number
 
-  // Actions
+
   createExpense: (data: CreateExpenseRequest) => Promise<void>
   updateExpense: (data: UpdateExpenseRequest) => Promise<void>
   deleteExpense: (id: string) => Promise<void>
@@ -41,7 +41,7 @@ export const useAdvancedRealTime = (
     pollInterval = 30000
   } = options
 
-  // State
+
   const [expenses, setExpenses] = useState<Expense[]>([])
   const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -51,19 +51,19 @@ export const useAdvancedRealTime = (
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [pendingOperations, setPendingOperations] = useState(0)
 
-  // Refs
+
   const expensesAPI = useRef(new SupabaseExpensesAPI())
   const authAPI = useRef(AuthAPI.getInstance())
   const subscriptionRef = useRef<any>(null)
   const pollIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const offlineQueue = useRef<Array<{ action: string, data: any }>>([])
 
-  // Generate optimistic ID
+
   const generateOptimisticId = useCallback(() => {
     return `temp-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }, [])
 
-  // Update dashboard stats
+
   const updateStats = useCallback(async (expenseList: Expense[]) => {
     try {
       const { calculateDashboardStats } = await import('../../../utils/src')
@@ -74,7 +74,7 @@ export const useAdvancedRealTime = (
     }
   }, [])
 
-  // Show notification
+
   const showNotification = useCallback((title: string, body: string) => {
     if (!enableNotifications) return
 
@@ -83,7 +83,7 @@ export const useAdvancedRealTime = (
     }
   }, [enableNotifications])
 
-  // Process offline queue
+
   const processOfflineQueue = useCallback(async () => {
     if (!enableOfflineSupport || offlineQueue.current.length === 0) return
 
@@ -106,32 +106,32 @@ export const useAdvancedRealTime = (
         }
       } catch (err) {
         console.error('Failed to process offline item:', item, err)
-        // Could re-queue or show user notification
+
       }
     }
 
     showNotification('💰 Sync Complete', 'Your offline changes have been synced')
   }, [enableOfflineSupport, showNotification])
 
-  // Initialize real-time connection
+
   const initialize = useCallback(async () => {
     try {
       setIsLoading(true)
       setError(null)
 
-      // Check auth
+
       const isAuth = await authAPI.current.isAuthenticated()
       if (!isAuth) {
         throw new Error('Authentication required')
       }
 
-      // Load initial data
+
       const initialExpenses = await expensesAPI.current.getExpenses()
       setExpenses(initialExpenses)
       await updateStats(initialExpenses)
       setLastUpdated(new Date())
 
-      // Set up real-time subscription
+
       subscriptionRef.current = expensesAPI.current.subscribeToExpenses(async (updatedExpenses) => {
         console.log('📡 Real-time update:', updatedExpenses.length, 'expenses')
         setExpenses(updatedExpenses)
@@ -145,10 +145,10 @@ export const useAdvancedRealTime = (
       setIsConnected(true)
       setIsLoading(false)
 
-      // Process any offline queue
+
       await processOfflineQueue()
 
-      // Set up polling fallback
+
       if (pollInterval > 0) {
         pollIntervalRef.current = setInterval(async () => {
           if (!isConnected) {
@@ -170,7 +170,7 @@ export const useAdvancedRealTime = (
     }
   }, [error, isConnected, pollInterval, updateStats, processOfflineQueue])
 
-  // Cleanup
+
   const cleanup = useCallback(() => {
     if (subscriptionRef.current) {
       subscriptionRef.current.unsubscribe()
@@ -182,7 +182,7 @@ export const useAdvancedRealTime = (
     }
   }, [])
 
-  // CRUD operations with optimistic updates and offline support
+
   const createExpense = useCallback(async (data: CreateExpenseRequest) => {
     setPendingOperations(prev => prev + 1)
 
@@ -204,7 +204,7 @@ export const useAdvancedRealTime = (
       }
 
       if (!isOnline && enableOfflineSupport) {
-        // Queue for later
+
         offlineQueue.current.push({ action: 'create', data })
         showNotification('💾 Saved Offline', 'Expense will sync when online')
         return
@@ -214,7 +214,7 @@ export const useAdvancedRealTime = (
       showNotification('✅ Expense Added', `${data.description} - $${data.amount}`)
 
     } catch (err) {
-      // Revert optimistic update
+
       if (enableOptimisticUpdates) {
         const refreshedExpenses = await expensesAPI.current.getExpenses()
         setExpenses(refreshedExpenses)
@@ -317,11 +317,11 @@ export const useAdvancedRealTime = (
     setError(null)
   }, [])
 
-  // Effects
+
   useEffect(() => {
     initialize()
 
-    // Request notification permission
+
     if (enableNotifications && typeof window !== 'undefined' && 'Notification' in window) {
       if (Notification.permission === 'default') {
         Notification.requestPermission()

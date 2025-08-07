@@ -1,5 +1,5 @@
-// Test script to verify Supabase setup
-// Run this with: node -r ts-node/register packages/api/src/test-supabase.ts
+
+
 
 import { supabase, isSupabaseConfigured } from './supabase'
 import { AuthAPI } from './auth'
@@ -8,7 +8,7 @@ import { SupabaseExpensesAPI } from './supabase-expenses'
 async function testSupabaseSetup() {
   console.log('🔍 Testing Supabase Setup...\n')
 
-  // Test 1: Configuration
+
   console.log('1. Configuration Check:')
   console.log('   Supabase configured:', isSupabaseConfigured())
   console.log('   Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL ? '✅ Set' : '❌ Not set')
@@ -26,7 +26,7 @@ async function testSupabaseSetup() {
   }
 
   try {
-    // Test 2: Database Connection
+
     console.log('2. Database Connection:')
     const { data, error } = await supabase.from('expenses').select('count').limit(1)
     
@@ -38,7 +38,7 @@ async function testSupabaseSetup() {
     }
     console.log('')
 
-    // Test 3: Auth API
+
     console.log('3. Authentication API:')
     const authAPI = AuthAPI.getInstance()
     
@@ -50,12 +50,12 @@ async function testSupabaseSetup() {
     }
     console.log('')
 
-    // Test 4: Expenses API (without auth)
+
     console.log('4. Expenses API:')
     const expensesAPI = new SupabaseExpensesAPI()
     
     try {
-      // This should fail since we're not authenticated
+
       await expensesAPI.getExpenses()
       console.log('   ⚠️  Unexpectedly succeeded - this should require auth')
     } catch (expError) {
@@ -79,7 +79,7 @@ async function testSupabaseSetup() {
   }
 }
 
-// Run the test if this file is executed directly
+
 if (require.main === module) {
   testSupabaseSetup()
 }

@@ -86,7 +86,6 @@ export default function SharedReportPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--background)' }}>
-      {/* Header */}
       <div style={{
         background: 'var(--card-background)',
         borderBottom: '1px solid var(--border-color)',
@@ -108,7 +107,6 @@ export default function SharedReportPage() {
       </div>
 
       <div className="container">
-        {/* Summary Cards */}
         <div style={{ 
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
@@ -135,7 +133,6 @@ export default function SharedReportPage() {
           </div>
         </div>
 
-        {/* Category Breakdown */}
         {stats.categoryBreakdown.length > 0 && (
           <div className="card" style={{ marginBottom: '32px' }}>
             <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600' }}>
@@ -178,7 +175,6 @@ export default function SharedReportPage() {
           </div>
         )}
 
-        {/* Recent Expenses */}
         {expenses.length > 0 && (
           <div style={{ marginBottom: '32px' }}>
             <h3 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600' }}>
@@ -204,7 +200,6 @@ export default function SharedReportPage() {
           </div>
         )}
 
-        {/* Footer */}
         <div style={{ 
           textAlign: 'center', 
           padding: '24px 16px',

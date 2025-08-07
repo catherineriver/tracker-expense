@@ -7,20 +7,20 @@ const STORAGE_KEYS = {
   USERS: 'expense_tracker_users'
 };
 
-// Cross-platform storage that works on both web and React Native
+
 class UniversalStorage {
   private memoryStorage = new Map<string, string>();
   private isWeb = typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   private asyncStorage: any = null;
 
   constructor() {
-    // Try to import AsyncStorage for React Native
+
     if (!this.isWeb) {
       try {
-        // Dynamic import for React Native AsyncStorage
+
         this.asyncStorage = require('@react-native-async-storage/async-storage').default;
       } catch (e) {
-        // AsyncStorage not available, fall back to memory
+
         console.warn('AsyncStorage not available, using memory storage');
       }
     }
@@ -29,12 +29,12 @@ class UniversalStorage {
   async setItem(key: string, value: string): Promise<void> {
     this.memoryStorage.set(key, value);
     
-    // Save to appropriate persistent storage
+
     if (this.isWeb) {
       try {
         localStorage.setItem(key, value);
       } catch (e) {
-        // Ignore localStorage errors
+
       }
     } else if (this.asyncStorage) {
       try {
@@ -46,7 +46,7 @@ class UniversalStorage {
   }
   
   async getItem(key: string): Promise<string | null> {
-    // Try persistent storage first
+
     if (this.isWeb) {
       try {
         const localValue = localStorage.getItem(key);
@@ -55,7 +55,7 @@ class UniversalStorage {
           return localValue;
         }
       } catch (e) {
-        // Ignore localStorage errors
+
       }
     } else if (this.asyncStorage) {
       try {
@@ -69,7 +69,7 @@ class UniversalStorage {
       }
     }
     
-    // Fall back to memory
+
     return this.memoryStorage.get(key) || null;
   }
   
@@ -80,7 +80,7 @@ class UniversalStorage {
       try {
         localStorage.removeItem(key);
       } catch (e) {
-        // Ignore localStorage errors
+
       }
     } else if (this.asyncStorage) {
       try {

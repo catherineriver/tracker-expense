@@ -39,7 +39,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onLogout }) => {
     if (isLoading) return 'Loading...'
     if (!user) return 'Welcome'
     
-    // Use the user's name, or fallback to email username
+
     return user.name || user.email.split('@')[0]
   }
 

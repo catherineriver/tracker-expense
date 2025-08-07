@@ -31,7 +31,7 @@ export const ShareReport: React.FC = () => {
       await navigator.clipboard.writeText(shareUrl)
       alert('Link copied to clipboard!')
     } catch (err) {
-      // Fallback for older browsers
+
       const textArea = document.createElement('textarea')
       textArea.value = shareUrl
       document.body.appendChild(textArea)
@@ -52,7 +52,7 @@ export const ShareReport: React.FC = () => {
         url: shareUrl
       })
     } catch {
-      // User cancelled sharing or error occurred
+
       console.log('Share cancelled or failed')
     }
   }

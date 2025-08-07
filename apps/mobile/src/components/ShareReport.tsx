@@ -14,7 +14,7 @@ export const ShareReport: React.FC = () => {
       setError(null)
       
       const report = await expensesAPI.generateShareableReport()
-      // For mobile, we'll use a placeholder URL since we don't have window.location
+
       const url = `https://your-domain.com/shared-report/${report.id}`
       setShareUrl(url)
     } catch (err) {
@@ -45,7 +45,7 @@ export const ShareReport: React.FC = () => {
         title: 'My Expense Report'
       })
     } catch (err) {
-      // User cancelled sharing or error occurred
+
       console.log('Share cancelled or failed:', err)
     }
   }

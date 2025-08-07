@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     marginBottom: 4
   },
   activeTabIcon: {
-    // No specific styling needed for active state
+
   },
   tabLabel: {
     fontSize: 12,

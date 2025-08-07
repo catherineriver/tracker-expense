@@ -70,7 +70,7 @@ export class SupabaseExpensesAPI {
     try {
       const userId = await this.requireAuth()
 
-      // Validate the update data
+
       if (request.amount !== undefined || request.category || request.description || request.date) {
         const validationRequest = {
           amount: request.amount || 0,
@@ -139,7 +139,7 @@ export class SupabaseExpensesAPI {
       const userId = await this.requireAuth()
       const reportId = this.generateId()
       
-      // Store the shared report data
+
       const reportData = {
         id: reportId,
         expenses,
@@ -148,7 +148,7 @@ export class SupabaseExpensesAPI {
         userId
       }
       
-      // Store in localStorage for now (could be moved to a Supabase table later)
+
       if (typeof window !== 'undefined') {
         const reportKey = `expense_report_${reportId}`
         localStorage.setItem(reportKey, JSON.stringify(reportData))
@@ -163,7 +163,7 @@ export class SupabaseExpensesAPI {
 
   async getSharedReport(reportId: string): Promise<{ expenses: Expense[]; stats: DashboardStats } | null> {
     try {
-      // For now, retrieve from localStorage (could be moved to Supabase table later)
+
       if (typeof window !== 'undefined') {
         const reportKey = `expense_report_${reportId}`
         const reportData = localStorage.getItem(reportKey)
@@ -177,7 +177,7 @@ export class SupabaseExpensesAPI {
         }
       }
       
-      // Return null if report not found
+
       return null
     } catch (error) {
       console.error('Get shared report error:', error)
@@ -191,12 +191,12 @@ export class SupabaseExpensesAPI {
       .select('*')
       .eq('user_id', userId)
 
-    // Apply sorting at database level for better performance
+
     if (sortBy) {
       const supabaseColumn = sortBy === 'date' ? 'created_at' : sortBy
       query = query.order(supabaseColumn, { ascending: sortOrder === 'asc' })
     } else {
-      // Default sorting by creation date, newest first
+
       query = query.order('created_at', { ascending: false })
     }
 
@@ -206,7 +206,7 @@ export class SupabaseExpensesAPI {
     
     let expenses = data.map(this.mapSupabaseExpense)
 
-    // Apply filters on client side (could be moved to database for better performance)
+
     if (filter) {
       expenses = filterExpenses(expenses, filter)
     }
@@ -214,11 +214,11 @@ export class SupabaseExpensesAPI {
     return expenses
   }
 
-  // Real-time subscription method
+
   subscribeToExpenses(callback: (expenses: Expense[]) => void) {
     let userId: string | null = null
 
-    // Get the current user ID
+
     this.requireAuth().then(id => {
       userId = id
 
@@ -232,7 +232,7 @@ export class SupabaseExpensesAPI {
             filter: `user_id=eq.${userId}`
           },
           async () => {
-            // When any change occurs, fetch the latest expenses without auth check
+
             try {
               const expenses = await this.getExpensesForUser(userId!)
               callback(expenses)
@@ -252,10 +252,10 @@ export class SupabaseExpensesAPI {
       console.error('Error setting up real-time subscription:', error)
     })
 
-    // Return immediate unsubscribe function
+
     return { 
       unsubscribe: () => {
-        // Channel cleanup will happen in the async block above
+
       }
     }
   }

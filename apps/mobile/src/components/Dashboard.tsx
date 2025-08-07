@@ -76,7 +76,6 @@ export const Dashboard: React.FC = () => {
         >
             <Text style={styles.title}>Dashboard</Text>
 
-            {/* Error Banner */}
             {error && (
                 <View style={styles.errorBanner}>
                     <Text style={styles.errorBannerText}>⚠️ {error}</Text>
@@ -88,7 +87,6 @@ export const Dashboard: React.FC = () => {
                 </View>
             )}
 
-            {/* Summary Cards */}
             <View style={styles.summaryContainer}>
                 <View style={styles.summaryCard}>
                     <Text style={styles.summaryAmount}>{formatCurrency(dashboardStats.totalAmount)}</Text>
@@ -104,7 +102,6 @@ export const Dashboard: React.FC = () => {
                 </View>
             </View>
 
-            {/* Category Breakdown */}
             {dashboardStats.categoryBreakdown.length > 0 && (
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Spending by Category</Text>
@@ -134,7 +131,6 @@ export const Dashboard: React.FC = () => {
                 </View>
             )}
 
-            {/* Recent Expenses */}
             {dashboardStats.recentExpenses.length > 0 && (
                 <View style={styles.recentSection}>
                     <Text style={styles.cardTitle}>Recent Expenses</Text>
@@ -144,7 +140,6 @@ export const Dashboard: React.FC = () => {
                 </View>
             )}
 
-            {/* Quick Tips */}
             <View style={styles.tipsCard}>
                 <Text style={styles.tipsTitle}>💡 Real-Time Features</Text>
                 <View style={styles.tipsList}>

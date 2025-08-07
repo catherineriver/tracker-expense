@@ -87,7 +87,6 @@ export const AddExpense: React.FC<RealTimeAddExpenseProps> = ({ onExpenseAdded }
                 </View>
             )}
 
-            {/* Offline notice */}
             {!isOnline && (
                 <View style={styles.offlineNotice}>
                     <Text style={styles.offlineNoticeText}>

@@ -35,7 +35,7 @@ export const ExpenseList: React.FC = () => {
                         try {
                             await deleteExpense(expenseId)
                         } catch (err) {
-                            // Error already handled by the hook
+
                         }
                     }
                 }
@@ -78,7 +78,6 @@ export const ExpenseList: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            {/* Header with status */}
             <View style={styles.header}>
                 <View style={styles.headerTop}>
                     <Text style={styles.title}>Expenses ({expenses.length})</Text>
@@ -88,7 +87,6 @@ export const ExpenseList: React.FC = () => {
                 </View>
             </View>
 
-            {/* Error banner */}
             {error && expenses.length > 0 && (
                 <View style={styles.errorBanner}>
                     <Text style={styles.errorBannerText}>⚠️ {error}</Text>
@@ -109,7 +107,7 @@ export const ExpenseList: React.FC = () => {
             ) : (
                 <ScrollView style={styles.expenseList} showsVerticalScrollIndicator={false}>
                     {expenses.map(expense => {
-                        // Check if this is an optimistic (pending) expense
+
                         const isOptimistic = expense.id.startsWith('temp-')
 
                         return (
@@ -128,7 +126,6 @@ export const ExpenseList: React.FC = () => {
                 </ScrollView>
             )}
 
-            {/* Offline indicator */}
             {!isOnline && (
                 <View style={styles.offlineIndicator}>
                     <Text style={styles.offlineText}>📴 Working offline</Text>

@@ -142,7 +142,7 @@ export class AuthAPI {
     }
   }
 
-  // Listen to auth state changes (useful for real-time auth updates)
+
   onAuthStateChange(callback: (user: User | null) => void) {
     return supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('Auth state changed:', event)
