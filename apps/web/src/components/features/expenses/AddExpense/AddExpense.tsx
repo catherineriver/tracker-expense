@@ -5,8 +5,8 @@ import { ExpensesAPI } from '@api'
 import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense, formatDate } from '@utils'
 import { getCategoryEmoji } from '@constants'
 import styles from './AddExpense.module.css'
-import {PageTitle} from "../../../ui/PageTitle/PageTitle";
-import {PageLayout} from "../../../layout/PageLayout/PageLayout";
+import {PageTitle} from "@/components/ui/PageTitle/PageTitle";
+import {PageLayout} from "@/components/layout/PageLayout/PageLayout";
 
 interface AddExpenseProps {
   onExpenseAdded?: () => void

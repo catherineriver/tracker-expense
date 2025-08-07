@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import { ExpensesAPI } from '@api'
 import { DashboardStats, Expense, formatCurrency } from '@utils'
-import { ExpenseCard } from '../../../components'
+import { ExpenseCard } from '@/components'
 
 export default function SharedReportPage() {
   const params = useParams()

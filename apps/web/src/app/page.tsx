@@ -9,7 +9,7 @@ import {
   ExpenseList,
   AddExpense,
   ShareReport
-} from '../components'
+} from '@/components'
 import styles from './page.module.css'
 
 type Page = 'dashboard' | 'expenses' | 'add-expense'

@@ -2,17 +2,17 @@ import React from 'react';
 import { formatCurrency } from '@utils';
 import { useAdvancedRealTimeWeb } from '@api';
 import styles from './Dashboard.module.css';
-import {ShareReport} from "../../reports";
-import {PageTitle} from "../../../ui/PageTitle/PageTitle";
-import {Section} from "../../../layout/Section/Section";
-import {Graph} from "../Graph/Graph";
-import {ExpenseItem} from "../../expenses/ExpenseItem/ExpenseItem";
-import {Loading} from "../../../ui/Loading/Loading";
-import {Error} from "../../../ui/Error/Error";
-import {EmptyState} from "../../../ui/EmptyState/EmptyState";
-import {Currency} from "../../../ui/Currency/Currency";
-import {Card} from "../../../ui/Card/Card";
-import {PageLayout} from "../../../layout/PageLayout/PageLayout";
+import {ShareReport} from "@/components/features/reports";
+import {PageTitle} from "@/components/ui/PageTitle/PageTitle";
+import {Section} from "@/components/layout/Section/Section";
+import {Graph} from "@/components/features/dashboard/Graph/Graph";
+import {ExpenseItem} from "@/components/features/expenses/ExpenseItem/ExpenseItem";
+import {Loading} from "@/components/ui/Loading/Loading";
+import {Error} from "@/components/ui/Error/Error";
+import {EmptyState} from "@/components/ui/EmptyState/EmptyState";
+import {Currency} from "@/components/ui/Currency/Currency";
+import {Card} from "@/components/ui/Card/Card";
+import {PageLayout} from "@/components/layout/PageLayout/PageLayout";
 
 export const Dashboard: React.FC = () => {
   const {

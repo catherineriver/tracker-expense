@@ -3,8 +3,8 @@
 import React, { useState } from 'react'
 import { AuthAPI } from '@api'
 import { validateAuth } from '@utils'
-import { Button } from "../../../ui/Button/Button"
-import { BaseInput } from '../../../ui/inputs/BaseInput/BaseInput'
+import { Button } from "@/components/ui/Button/Button"
+import { BaseInput } from '@/components/ui/inputs/BaseInput/BaseInput'
 import styles from './AuthForm.module.css'
 
 export interface AuthFormProps {

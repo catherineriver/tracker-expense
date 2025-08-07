@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../features/expenses/AddExpense/AddExpense.module.css'
+import styles from '@/components/features/expenses/AddExpense/AddExpense.module.css'
 
 interface FormFieldProps {
   label: string

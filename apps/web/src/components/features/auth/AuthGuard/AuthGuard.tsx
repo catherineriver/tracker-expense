@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { AuthAPI } from '@api'
-import { AuthForm } from "../AuthForm/AuthForm"
+import { AuthForm } from "@/components/features/auth/AuthForm/AuthForm"
 import styles from './AuthGuard.module.css'
 
 interface AuthGuardProps {

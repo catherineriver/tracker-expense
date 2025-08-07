@@ -3,14 +3,14 @@
 import React, { useState, useEffect } from 'react'
 import { ExpensesAPI } from '@api'
 import { Expense, ExpenseFilter } from '@utils'
-import { ExpenseCard } from '../ExpenseCard/ExpenseCard'
+import { ExpenseCard } from '@/components/features/expenses/ExpenseCard/ExpenseCard'
 import styles from './ExpenseList.module.css'
-import {Filters} from "../../filters/Filters";
-import {Loading} from "../../../ui/Loading/Loading";
-import {Error} from "../../../ui/Error/Error";
-import {PageTitle} from "../../../ui/PageTitle/PageTitle";
-import {PageLayout} from "../../../layout/PageLayout/PageLayout";
-import {EmptyState} from "../../../ui/EmptyState/EmptyState";
+import {Filters} from "@/components/features/filters/Filters";
+import {Loading} from "@/components/ui/Loading/Loading";
+import {Error} from "@/components/ui/Error/Error";
+import {PageTitle} from "@/components/ui/PageTitle/PageTitle";
+import {PageLayout} from "@/components/layout/PageLayout/PageLayout";
+import {EmptyState} from "@/components/ui/EmptyState/EmptyState";
 
 export const ExpenseList: React.FC = () => {
   const [expenses, setExpenses] = useState<Expense[]>([])

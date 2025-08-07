@@ -1,7 +1,7 @@
 import React from "react";
 import {Expense, formatCurrency} from "@utils";
 import styles from "./ExpenseItem.module.css";
-import {Currency} from "../../../ui/Currency/Currency";
+import {Currency} from "@/components/ui/Currency/Currency";
 
 type ExpenseProps = {
     expense: Expense
