@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpenseFilter, ExpenseCategory, EXPENSE_CATEGORIES } from '@utils';
+import { ExpenseFilter, ExpenseCategory, EXPENSE_CATEGORIES } from '@tracker-expense/utils';
 import styles from './Filters.module.css';
 
 interface ExpenseFilterCardProps {

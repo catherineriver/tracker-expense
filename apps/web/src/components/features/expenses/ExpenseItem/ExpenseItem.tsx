@@ -1,5 +1,5 @@
 import React from "react";
-import {Expense, formatCurrency} from "@utils";
+import {Expense, formatCurrency} from "@tracker-expense/utils";
 import styles from "./ExpenseItem.module.css";
 import {Currency} from "@/components/ui/Currency/Currency";
 

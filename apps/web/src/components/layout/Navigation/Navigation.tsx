@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { authAPI } from '@api'
-import { User } from '@utils'
+import { authAPI } from '@tracker-expense/api'
+import { User } from '@tracker-expense/utils'
 import styles from './Navigation.module.css'
 
 interface NavigationProps {

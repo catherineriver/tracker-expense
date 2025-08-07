@@ -1,5 +1,5 @@
 {
-  "name": "@api",
+  "name": "@tracker-expense/api",
   "version": "1.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -9,7 +9,7 @@
     "axios": "^1.11.0"
   },
   "devDependencies": {
-    "@utils":"*",
+    "@tracker-expense/utils":"*",
     "typescript": "^5.9.2"
   },
   "private": true

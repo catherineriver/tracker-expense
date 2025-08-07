@@ -2,8 +2,8 @@
 
 import React, {useState, useEffect, useCallback} from "react";
 import { useParams } from 'next/navigation'
-import { expensesAPI } from '@api'
-import { DashboardStats, Expense, formatCurrency } from '@utils'
+import { expensesAPI } from '@tracker-expense/api'
+import { DashboardStats, Expense, formatCurrency } from '@tracker-expense/utils'
 import { ExpenseCard } from '@/components'
 
 export default function SharedReportPage() {

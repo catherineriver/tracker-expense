@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState, useEffect, useCallback} from "react";
-import { authAPI } from '@api'
+import { authAPI } from '@tracker-expense/api'
 import { AuthForm } from "@/components/features/auth/AuthForm/AuthForm"
 import styles from './AuthGuard.module.css'
 

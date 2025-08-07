@@ -19,7 +19,11 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@tracker-expense/api": ["../../packages/api/src"],
+      "@tracker-expense/ui": ["../../packages/ui/src"],
+      "@tracker-expense/utils": ["../../packages/utils/src"],
+      "@tracker-expense/constants": ["../../packages/constants/src"]
     },
     "plugins": [
       {

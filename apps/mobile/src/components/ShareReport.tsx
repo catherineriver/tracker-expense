@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Share, Linking } from 'react-native'
 import * as Clipboard from 'expo-clipboard'
-import { expensesAPI } from '@api'
+import { expensesAPI } from '@tracker-expense/api'
 
 export const ShareReport: React.FC = () => {
   const [shareUrl, setShareUrl] = useState<string | null>(null)

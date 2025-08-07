@@ -3,9 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@ui": ["../../packages/ui/src"],
-      "@utils": ["../../packages/utils/src"],
-      "@api": ["../../packages/api/src"]
+      "@tracker-expense/ui": ["../../packages/ui/src"],
+      "@tracker-expense/utils": ["../../packages/utils/src"],
+      "@tracker-expense/api": ["../../packages/api/src"],
+      "@tracker-expense/constants": ["../../packages/constants/src"]
     }
   },
   "include": [

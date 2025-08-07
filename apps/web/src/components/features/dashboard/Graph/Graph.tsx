@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatCurrency } from '@utils';
+import { formatCurrency } from '@tracker-expense/utils';
 import styles from './Graph.module.css';
 
 interface CategoryData {

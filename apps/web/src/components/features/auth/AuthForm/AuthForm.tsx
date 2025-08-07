@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import { authAPI } from '@api'
-import { validateAuth } from '@utils'
+import { authAPI } from '@tracker-expense/api'
+import { validateAuth } from '@tracker-expense/utils'
 import { Button } from "@/components/ui/Button/Button"
 import { BaseInput } from '@/components/ui/inputs/BaseInput/BaseInput'
 import styles from './AuthForm.module.css'

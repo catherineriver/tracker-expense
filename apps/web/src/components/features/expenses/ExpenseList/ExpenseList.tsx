@@ -1,8 +1,8 @@
 'use client'
 
 import React, {useState, useEffect, useCallback} from "react";
-import { expensesAPI } from '@api'
-import { Expense, ExpenseFilter } from '@utils'
+import { expensesAPI } from '@tracker-expense/api'
+import { Expense, ExpenseFilter } from '@tracker-expense/utils'
 import { ExpenseCard } from '@/components/features/expenses/ExpenseCard/ExpenseCard'
 import styles from './ExpenseList.module.css'
 import {Filters} from "@/components/features/filters/Filters";

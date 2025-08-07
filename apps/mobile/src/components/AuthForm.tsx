@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
-import { authAPI } from '@api'
+import { authAPI } from '@tracker-expense/api'
 
 interface AuthFormProps {
   onSuccess: () => void

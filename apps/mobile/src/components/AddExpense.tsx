@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native'
-import { useAdvancedRealTime } from '@api'
-import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense } from '@utils'
-import { getCategoryEmoji, getCategoryColor } from '@constants';
+import { useAdvancedRealTime } from '@tracker-expense/api'
+import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense } from '@tracker-expense/utils'
+import { getCategoryEmoji, getCategoryColor } from '@tracker-expense/constants';
 
 interface RealTimeAddExpenseProps {
     onExpenseAdded?: () => void

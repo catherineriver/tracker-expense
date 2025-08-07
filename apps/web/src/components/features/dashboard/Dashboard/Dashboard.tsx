@@ -1,6 +1,6 @@
 import React from 'react';
-import { Expense, formatCurrency} from "@utils";
-import {useAdvancedRealTimeWeb} from "@api";
+import { Expense, formatCurrency} from "@tracker-expense/utils";
+import {useAdvancedRealTimeWeb} from "@tracker-expense/api";
 import styles from "./Dashboard.module.css";
 import {ShareReport} from "@/components/features/reports";
 import {PageTitle} from "@/components/ui/PageTitle/PageTitle";

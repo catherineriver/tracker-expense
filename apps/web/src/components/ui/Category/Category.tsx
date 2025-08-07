@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Category.module.css';
-import { getCategoryEmoji, getCategoryColor } from '@constants';
-import {ExpenseCategory} from '@utils'
+import { getCategoryEmoji, getCategoryColor } from '@tracker-expense/constants';
+import {ExpenseCategory} from '@tracker-expense/utils'
 
 type CategoryProps = {
     category: ExpenseCategory;

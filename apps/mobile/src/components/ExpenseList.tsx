@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native'
-import { useAdvancedRealTime } from '@api/src/hooks/useAdvancedRealTime'
-import { getCategoryEmoji } from '@constants';
+import { useAdvancedRealTime } from '@tracker-expense/api/src/hooks/useAdvancedRealTime'
+import { getCategoryEmoji } from '@tracker-expense/constants';
 import {ExpenseCard} from "./ExpenseCard";
 
 export const ExpenseList: React.FC = () => {

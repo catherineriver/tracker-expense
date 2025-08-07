@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import { expensesAPI } from '@api'
-import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense, formatDate } from '@utils'
-import {getCategoryColor, getCategoryEmoji} from "@constants";
+import { expensesAPI } from '@tracker-expense/api'
+import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense, formatDate } from '@tracker-expense/utils'
+import {getCategoryColor, getCategoryEmoji} from "@tracker-expense/constants";
 import styles from './AddExpense.module.css'
 import {PageTitle} from "@/components/ui/PageTitle/PageTitle";
 import {PageLayout} from "@/components/layout/PageLayout/PageLayout";

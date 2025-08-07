@@ -1,5 +1,5 @@
 {
-  "name": "@constants",
+  "name": "@tracker-expense/constants",
   "version": "1.0.0",
   "main": "src/categories.ts",
   "types": "src/index.ts",

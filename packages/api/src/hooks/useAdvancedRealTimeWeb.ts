@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Expense, CreateExpenseRequest, UpdateExpenseRequest, DashboardStats } from '@utils'
+import { Expense, CreateExpenseRequest, UpdateExpenseRequest, DashboardStats } from '@tracker-expense/utils'
 import { SupabaseExpensesAPI } from '../supabase-expenses'
 import { AuthAPI } from '../auth'
 
@@ -66,7 +66,7 @@ export const useAdvancedRealTimeWeb = (
 
   const updateStats = useCallback(async (expenseList: Expense[]) => {
     try {
-      const { calculateDashboardStats } = await import('@utils')
+      const { calculateDashboardStats } = await import('@tracker-expense/utils')
       const stats = calculateDashboardStats(expenseList)
       setDashboardStats(stats)
     } catch (err) {

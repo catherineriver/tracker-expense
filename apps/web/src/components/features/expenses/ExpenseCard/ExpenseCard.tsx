@@ -1,5 +1,5 @@
 import React from "react";
-import {Expense, formatCurrency, formatDate} from "@utils";
+import {Expense, formatCurrency, formatDate} from "@tracker-expense/utils";
 import styles from "./ExpenseCard.module.css";
 import {Category, Currency, Button} from "@/components/ui";
 

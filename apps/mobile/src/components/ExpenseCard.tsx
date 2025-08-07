@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { Expense, formatCurrency, formatDate } from "@utils"
-import { getCategoryEmoji, getCategoryColor } from '@constants';
+import { Expense, formatCurrency, formatDate } from "@tracker-expense/utils"
+import { getCategoryEmoji, getCategoryColor } from '@tracker-expense/constants';
 
 type ExpenseCardProps = {
     expense: Expense

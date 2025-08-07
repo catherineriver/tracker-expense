@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { expensesAPI } from '@api'
+import { expensesAPI } from '@tracker-expense/api'
 import styles from './ShareReport.module.css'
 
 export const ShareReport: React.FC = () => {

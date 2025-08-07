@@ -9,18 +9,18 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@api": "*",
+    "@tracker-expense/api": "*",
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-community/netinfo": "^11.4.1",
     "@react-native-picker/picker": "2.8.1",
     "@supabase/supabase-js": "^2.53.0",
-    "@ui": "*",
-    "@utils": "*",
-    "@constants": "*",
+    "@tracker-expense/ui": "*",
+    "@tracker-expense/utils": "*",
+    "@tracker-expense/constants": "*",
     "expo": "~53.0.00",
     "expo-clipboard": "^7.1.5",
     "expo-status-bar": "~2.2.3",
-    "react": "19.0.0",
+    "react": "19.1.1",
     "react-native": "0.79.5",
     "react-native-safe-area-context": "5.4.0"
   },

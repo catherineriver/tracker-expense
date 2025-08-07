@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Expense, CreateExpenseRequest, UpdateExpenseRequest, DashboardStats } from '@utils'
+import { Expense, CreateExpenseRequest, UpdateExpenseRequest, DashboardStats } from '@tracker-expense/utils'
 import { SupabaseExpensesAPI } from '../supabase-expenses'
 import { AuthAPI } from '../auth'
 

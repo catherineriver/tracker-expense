@@ -8,8 +8,8 @@ import {
     StyleSheet,
     RefreshControl
 } from 'react-native';
-import { useAdvancedRealTime } from '@api/src/hooks/useAdvancedRealTime';
-import { formatCurrency } from '@utils';
+import { useAdvancedRealTime } from '@tracker-expense/api/src/hooks/useAdvancedRealTime';
+import { formatCurrency } from '@tracker-expense/utils';
 import { ExpenseCard } from './ExpenseCard';
 
 
