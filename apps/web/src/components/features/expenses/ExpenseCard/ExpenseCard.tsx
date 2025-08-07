@@ -1,8 +1,8 @@
 import React from "react";
 import {Expense, formatCurrency, formatDate} from "@utils";
 import styles from "./ExpenseCard.module.css";
-import {Category} from "../../../ui/Category/Category";
-import {Currency} from "../../../ui/Currency/Currency";
+import {Category} from "../../../ui";
+import {Currency} from "../../../ui";
 import {Button} from "../../../ui";
 
 type ExpenseProps = {
