@@ -15,7 +15,7 @@ A cross-platform expense tracking application built with React, React Native, an
 
 ## 📁 Project Structure
 
-This is a monorepo built with pnpm workspaces and includes:
+This is a monorepo built with npm workspaces and includes:
 
 ```
 tracker-expense/
@@ -25,8 +25,8 @@ tracker-expense/
 ├── packages/
 │   ├── api/           # Shared API layer (Supabase & local storage)
 │   ├── constants/     # Shared constants (categories, etc.)
-│   ├── utils/         # Shared utilities and types
-└── docs/              # Documentation
+│   ├── ui/            # Shared UI components
+│   └── utils/         # Shared utilities and types
 ```
 
 ## 🛠 Tech Stack
@@ -35,13 +35,13 @@ tracker-expense/
 - **Backend**: Supabase (PostgreSQL, Real-time, Auth)
 - **Language**: TypeScript
 - **Styling**: CSS Modules
-- **Package Manager**: pnpm
+- **Package Manager**: npm
 - **Build Tool**: Turbo (monorepo management)
 
 ## 📋 Prerequisites
 
 - Node.js 18+ 
-- pnpm 8+
+- npm 10+
 - Expo CLI (for mobile development)
 - Supabase account (for real-time features)
 
@@ -52,7 +52,7 @@ tracker-expense/
 ```bash
 git clone <repository-url>
 cd tracker-expense
-pnpm install
+npm install
 ```
 
 ### 2. Set Up Environment Variables
@@ -74,14 +74,14 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 **Web Application:**
 ```bash
 cd apps/web
-pnpm dev
+npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000)
 
 **Mobile Application:**
 ```bash
 cd apps/mobile
-pnpm start
+npm start
 ```
 Scan QR code with Expo Go app or run on simulator
 
@@ -89,32 +89,30 @@ Scan QR code with Expo Go app or run on simulator
 
 ### Root Level Commands
 ```bash
-pnpm install          # Install all dependencies
-pnpm build            # Build all packages
+npm install          # Install all dependencies
+npm run build            # Build all packages
 ```
 
 ### Web Application (`apps/web/`)
 ```bash
-pnpm dev              # Start development server (http://localhost:3000)
-pnpm build            # Build for production
-pnpm start            # Start production server
-pnpm lint             # Run ESLint
+npm run dev              # Start development server (http://localhost:3000)
+npm run build            # Build for production
+npm start            # Start production server
+npm run lint             # Run ESLint
 ```
 
 ### Mobile Application (`apps/mobile/`)
 ```bash
-pnpm start            # Start Expo development server
-pnpm android          # Start on Android device/emulator
-pnpm ios              # Start on iOS simulator
-pnpm web              # Start web version of mobile app
+npm start            # Start Expo development server
+npm run android          # Start on Android device/emulator
+npm run ios              # Start on iOS simulator
+npm run web              # Start web version of mobile app
 ```
 
 ### Package Development
 ```bash
-# Build individual packages
-cd packages/api && pnpm build
-cd packages/utils && pnpm build
-cd packages/constants && pnpm build
+# Packages are TypeScript source files that don't require building
+# They are imported directly by the apps during development and build
 ```
 
 ## 🏗 Architecture
@@ -124,9 +122,10 @@ cd packages/constants && pnpm build
 - **Cloud-first**: Data is stored in Supabase with real-time updates
 
 ### Package Structure
-- `@api`: Handles data persistence with Supabase
-- `@utils`: Types, validation, calculations, date formatting
-- `@constants`: Expense categories and other constants
+- `@tracker-expense/api`: Handles data persistence with Supabase
+- `@tracker-expense/utils`: Types, validation, calculations, date formatting
+- `@tracker-expense/constants`: Expense categories and other constants
+- `@tracker-expense/ui`: Shared UI components and styling
 
 ### Component Organization
 - **Features**: Business logic components (`auth`, `expenses`, `dashboard`)
@@ -163,7 +162,7 @@ The mobile app uses:
 ### Testing on Devices
 
 1. Install [Expo Go](https://expo.dev/client) on your device
-2. Run `pnpm start` in `apps/mobile/`
+2. Run `npm start` in `apps/mobile/`
 3. Scan QR code to open app
 
 ## 🔐 Authentication
@@ -177,8 +176,8 @@ The mobile app uses:
 ### Web Application
 ```bash
 cd apps/web
-pnpm build
-pnpm start  # or deploy to Vercel/Netlify
+npm run build
+npm start  # or deploy to Vercel/Netlify
 ```
 
 ### Mobile Application
@@ -199,21 +198,21 @@ npx expo start --clear
 
 **TypeScript errors:**
 ```bash
-pnpm build  # Build all packages first
+npm run build  # Build all packages first
 ```
 
 **Dependencies not found:**
 ```bash
 rm -rf node_modules
-pnpm install
+npm install
 ```
 
 ### Environment Setup
 
-Make sure you have the correct Node.js version and pnpm installed:
+Make sure you have the correct Node.js version and npm installed:
 ```bash
 node --version  # Should be 18+
-pnpm --version  # Should be 8+
+npm --version  # Should be 10+
 ```
 
 ## 📄 License

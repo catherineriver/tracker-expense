@@ -1,4 +1,4 @@
-import { User, Expense, AuthRequest, CreateExpenseRequest, UpdateExpenseRequest } from '../../utils/src';
+import { User, Expense } from '@tracker-expense/utils';
 
 const STORAGE_KEYS = {
   USER: 'expense_tracker_user',
