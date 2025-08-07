@@ -10,6 +10,7 @@ const nextConfig = {
     // Resolve aliases for the workspace packages
     config.resolve.alias = {
       ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'),
       '@ui': path.resolve(__dirname, '../../packages/ui/src'),
       '@api': path.resolve(__dirname, '../../packages/api/src'),
       '@utils': path.resolve(__dirname, '../../packages/utils/src'),
