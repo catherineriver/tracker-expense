@@ -20,7 +20,7 @@ export const Graph: React.FC<GraphProps> = ({
     className = ''
 }) => {
     return (
-        <div className={`${styles.container} ${className}`.trim()}>
+        <div className={`${styles.container} ${className}`}>
             {categories.map((category) => {
                 const percentage = (category.amount / totalAmount) * 100;
                 return (

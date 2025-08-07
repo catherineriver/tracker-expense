@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native'
 import { useAdvancedRealTime } from '@api'
 import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense } from '@utils'
-import { getCategoryEmoji } from '@constants';
+import { getCategoryEmoji, getCategoryColor } from '@constants';
 
 interface RealTimeAddExpenseProps {
     onExpenseAdded?: () => void
@@ -117,7 +117,7 @@ export const AddExpense: React.FC<RealTimeAddExpenseProps> = ({ onExpenseAdded }
                                 onPress={() => setCategory(cat)}
                                 style={[
                                     styles.categoryButton,
-                                    category === cat && styles.selectedCategoryButton
+                                    category === cat ? { backgroundColor: getCategoryColor(cat) } : {}
                                 ]}
                             >
                                 <Text style={styles.categoryEmoji}>
@@ -335,10 +335,6 @@ const styles = StyleSheet.create({
         minHeight: 70,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    selectedCategoryButton: {
-        backgroundColor: '#007AFF',
-        borderColor: '#007AFF'
     },
     categoryEmoji: {
         fontSize: 20,

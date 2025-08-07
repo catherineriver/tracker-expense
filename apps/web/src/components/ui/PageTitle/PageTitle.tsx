@@ -13,7 +13,7 @@ export const PageTitle: React.FC<TitleProps> = ({
   className = '' 
 }) => {
   return (
-    <h2 className={`${styles.title} ${className}`.trim()}>
+    <h2 className={`${styles.title} ${className}`}>
       {children}
       {additionalContent && (
         <span className={styles.additionalContent}>

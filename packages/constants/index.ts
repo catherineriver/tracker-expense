@@ -1,1 +1,1 @@
-export { getCategoryEmoji } from './src/categories';
+export { getCategoryEmoji, getCategoryColor } from './src/categories';

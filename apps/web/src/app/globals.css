@@ -11,7 +11,8 @@
   --border-radius: 16px;
   --bottom-navigation-height: 50px;
   --text-primary: #222;
-
+  --container-width: 1024px;
+  --accent-color: darkgreen;
 }
 
 * {

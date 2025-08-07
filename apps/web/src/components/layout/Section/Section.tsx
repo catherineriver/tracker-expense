@@ -15,7 +15,7 @@ export const Section: React.FC<SectionProps> = ({
     className = ''
 }) => {
     return (
-        <section className={`${styles.section} ${className}`.trim()}>
+        <section className={`${styles.section} ${className}`}>
             {(title || actions) && (
                 <div className={styles.header}>
                     {title && (

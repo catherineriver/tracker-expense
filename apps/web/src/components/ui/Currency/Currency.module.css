@@ -1,6 +1,14 @@
 .currency {
     font-size: 20px;
     font-weight: 700;
-    color: var(--foreground);
 }
 
+.accent {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 56px;
+}
+
+.default {
+    color: var(--foreground);
+}

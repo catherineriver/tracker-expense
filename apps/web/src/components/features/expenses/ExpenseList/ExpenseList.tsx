@@ -101,18 +101,19 @@ export const ExpenseList: React.FC = () => {
   }
 
   return (
-      <PageLayout>
+      <>
       <div className={styles.header}>
-         <PageTitle additionalContent={`(${filteredExpenses.length})`}>Expenses</PageTitle>
+          <PageTitle additionalContent={`(${filteredExpenses.length})`}>Expenses</PageTitle>
 
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className={styles.filterToggle}
-        >
-          {showFilters ? 'Hide' : 'Filter'}
-        </button>
+          <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={styles.filterToggle}
+          >
+              {showFilters ? 'Hide' : 'Filter'}
+          </button>
       </div>
 
+      <PageLayout>
       {showFilters && (
           <Filters
               filter={filter}
@@ -139,5 +140,6 @@ export const ExpenseList: React.FC = () => {
         </div>
       )}
           </PageLayout>
+      </>
   )
 }

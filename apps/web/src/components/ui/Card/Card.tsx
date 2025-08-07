@@ -4,17 +4,15 @@ import styles from "./Card.module.css";
 type Props = {
     children?: React.ReactNode
     onPress?: () => void
-    className?: string
 }
 
 export const Card: React.FC<Props> = ({
-                                          children,
+  children,
   onPress,
-  className
 }) => {
     return (
         <div
-            className={`${styles.card} ${className}`}
+            className={`${styles.card}`}
             onClick={onPress}
         >
             {children}

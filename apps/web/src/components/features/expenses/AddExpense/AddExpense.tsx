@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { ExpensesAPI } from '@api'
 import { ExpenseCategory, EXPENSE_CATEGORIES, validateExpense, formatDate } from '@utils'
-import { getCategoryEmoji } from '@constants'
+import {getCategoryColor, getCategoryEmoji} from "@constants";
 import styles from './AddExpense.module.css'
 import {PageTitle} from "@/components/ui/PageTitle/PageTitle";
 import {PageLayout} from "@/components/layout/PageLayout/PageLayout";
@@ -59,111 +59,113 @@ export const AddExpense: React.FC<AddExpenseProps> = ({ onExpenseAdded }) => {
   }
 
   return (
-      <PageLayout>
+      <>
         <PageTitle>Add Expense</PageTitle>
-
-      {errors.length > 0 && (
-        <div className={styles.errorCard}>
-          {errors.map((error, index) => (
-            <div key={index} className={styles.errorText}>
-              {error}
+        <PageLayout>
+          {errors.length > 0 && (
+            <div className={styles.errorCard}>
+              {errors.map((error, index) => (
+                <div key={index} className={styles.errorText}>
+                  {error}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
+          )}
 
-      <div className={styles.formCard}>
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Amount ($)</label>
-          <input
-            type="number"
-            step="0.01"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="0.00"
-            className={`${styles.input} ${styles.amountInput}`}
-          />
-        </div>
+          <div className={styles.formCard}>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Amount ($)</label>
+              <input
+                type="number"
+                step="0.01"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="0.00"
+                className={`${styles.input} ${styles.amountInput}`}
+              />
+            </div>
 
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Category</label>
-          <div className={styles.categoryGrid}>
-            {EXPENSE_CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setCategory(cat)}
-                className={`${styles.categoryButton} ${category === cat ? styles.categoryButtonActive : ''}`}
-              >
-                <span className={styles.categoryEmoji}>
-                  {getCategoryEmoji(cat)}
-                </span>
-                <span className={styles.categoryText}>
-                  {cat}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="What did you spend on?"
-            className={`${styles.input} ${styles.textarea}`}
-            rows={3}
-            maxLength={200}
-          />
-          <div className={styles.characterCount}>
-            {description.length}/200
-          </div>
-        </div>
-
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Date</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className={styles.input}
-          />
-        </div>
-
-        <div className={styles.actionButtonsGrid}>
-          <button
-            type="button"
-            onClick={() => {
-              setAmount('')
-              setCategory('other')
-              setDescription('')
-              setDate(formatDate(new Date()))
-              setErrors([])
-            }}
-            className={`${styles.button} ${styles.buttonSecondary}`}
-            disabled={isLoading}
-          >
-            Clear
-          </button>
-          
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className={`${styles.button} ${styles.buttonPrimary}`}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <div className={styles.loadingContainer}>
-                <div className={styles.spinner}></div>
-                Adding...
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Category</label>
+              <div className={styles.categoryGrid}>
+                {EXPENSE_CATEGORIES.map(cat => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setCategory(cat)}
+                    className={`${styles.categoryButton} ${category === cat ? styles.categoryButtonActive : ''}`}
+                    style={{ '--category-color': getCategoryColor(category) } as React.CSSProperties}
+                  >
+                    <span className={styles.categoryEmoji}>
+                      {getCategoryEmoji(cat)}
+                    </span>
+                    <span className={styles.categoryText}>
+                      {cat}
+                    </span>
+                  </button>
+                ))}
               </div>
-            ) : (
-              'Add Expense'
-            )}
-          </button>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Description</label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="What did you spend on?"
+                className={`${styles.input} ${styles.textarea}`}
+                rows={3}
+                maxLength={200}
+              />
+              <div className={styles.characterCount}>
+                {description.length}/200
+              </div>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Date</label>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className={styles.input}
+              />
+            </div>
+
+            <div className={styles.actionButtonsGrid}>
+              <button
+                type="button"
+                onClick={() => {
+                  setAmount('')
+                  setCategory('other')
+                  setDescription('')
+                  setDate(formatDate(new Date()))
+                  setErrors([])
+                }}
+                className={`${styles.button} ${styles.buttonSecondary}`}
+                disabled={isLoading}
+              >
+                Clear
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className={`${styles.button} ${styles.buttonPrimary}`}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <div className={styles.loadingContainer}>
+                    <div className={styles.spinner}></div>
+                    Adding...
+                  </div>
+                ) : (
+                  'Add Expense'
+                )}
+              </button>
+            </div>
         </div>
-      </div>
-    </PageLayout>
+        </PageLayout>
+      </>
   )
 }

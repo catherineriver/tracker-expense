@@ -100,13 +100,13 @@
 }
 
 .categoryButtonActive {
-  background-color: var(--primary-color);
+    background-color: var(--category-color);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--category-color);
 }
 
 .categoryButtonActive:hover {
-  background-color: #0056CC;
+    background-color: var(--category-color);
 }
 
 .categoryEmoji {

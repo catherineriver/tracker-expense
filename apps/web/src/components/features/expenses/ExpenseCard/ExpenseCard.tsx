@@ -14,54 +14,29 @@ type ExpenseProps = {
 export const ExpenseCard: React.FC<ExpenseProps> = ({
     expense,
     onPress,
-    onEdit,
-    onDelete
 }) => {
     return (
         <div
             className={styles.expenseCard}
             onClick={onPress}
         >
-            <div className={styles.header}>
-                <p className={styles.description}>
-                    {expense.description}
-                </p>
-                <Currency amount={formatCurrency(expense.amount)}/>
+            <Category category={expense.category}/>
+            <div className={styles.expenseContent}>
+                <div className={styles.header}>
+                    <p className={styles.description}>
+                        {expense.description}
+                    </p>
+
+                </div>
+
+                <div className={styles.cardFooter}>
+                    <Currency amount={formatCurrency(expense.amount)}/>
+                    <span className={styles.date}>
+                        {formatDate(new Date(expense.date))}
+                    </span>
+                </div>
             </div>
 
-            <div className={styles.cardFooter}>
-                <Category category={expense.category}/>
-
-                <span className={styles.date}>
-                    {formatDate(new Date(expense.date))}
-                </span>
-                {(onEdit || onDelete) && (
-                    <div className={styles.actions}>
-                        {onEdit && (
-                            <Button
-                                className={styles.actionButton}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    onEdit();
-                                }}
-                            >
-                                Edit
-                            </Button>
-                        )}
-                        {onDelete && (
-                            <Button
-                                className={`${styles.actionButton} ${styles.deleteButton}`}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    onDelete();
-                                }}
-                            >
-                                Delete
-                            </Button>
-                        )}
-                    </div>
-                )}
-            </div>
         </div>
     );
 };

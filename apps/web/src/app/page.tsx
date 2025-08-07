@@ -28,9 +28,7 @@ export default function Home() {
     switch (currentPage) {
       case 'dashboard':
         return (
-          <div>
             <Dashboard />
-          </div>
         )
       case 'expenses':
         return <ExpenseList />

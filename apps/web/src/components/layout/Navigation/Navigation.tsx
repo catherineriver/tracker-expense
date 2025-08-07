@@ -47,9 +47,9 @@ export const Navigation: React.FC<NavigationProps> = ({ onLogout }) => {
   return (
     <div className={styles.navigation}>
       <div className={styles.leftSection}>
-        <h1 className={styles.title}>
+        <a className={styles.title} href={'/'}>
           💰 Expense Tracker
-        </h1>
+        </a>
       </div>
 
       <div className={styles.rightSection}>

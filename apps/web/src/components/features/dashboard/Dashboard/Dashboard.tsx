@@ -45,36 +45,37 @@ export const Dashboard: React.FC = () => {
     }
 
     return (
-        <PageLayout>
+        <>
             <PageTitle>Dashboard</PageTitle>
-            <Card>
-                <Currency amount={formatCurrency(dashboardStats.totalAmount)}/>
-                <div className={styles.summaryLabel}>Total Spent</div>
-            </Card>
-
-
-            {dashboardStats.categoryBreakdown.length > 0 && (
-                <Section title="Spending by Category">
-                    <Graph
-                        categories={dashboardStats.categoryBreakdown}
-                        totalAmount={dashboardStats.totalAmount}
-                    />
+            <PageLayout variant='grid'>
+                <Section title="Total Spent">
+                    <Currency variant="accent" amount={formatCurrency(dashboardStats.totalAmount)}/>
                 </Section>
-            )}
 
-            {dashboardStats.recentExpenses.length > 0 && (
-                <Section title="Recent Expenses">
-                    <div className={styles.list}>
-                        {dashboardStats.recentExpenses.map((expense: Expense) => (
-                <ExpenseItem key={expense.id} expense={expense} />
-            ))}
-            </div>
-        </Section>
-    )}
 
-        <Section>
-            <ShareReport />
-        </Section>
-    </PageLayout>
+                {dashboardStats.categoryBreakdown.length > 0 && (
+                    <Section title="Spending by Category">
+                        <Graph
+                            categories={dashboardStats.categoryBreakdown}
+                            totalAmount={dashboardStats.totalAmount}
+                        />
+                    </Section>
+                )}
+
+                {dashboardStats.recentExpenses.length > 0 && (
+                    <Section title="Recent Expenses">
+                        <div className={styles.list}>
+                            {dashboardStats.recentExpenses.map((expense: Expense) => (
+                    <ExpenseItem key={expense.id} expense={expense} />
+                ))}
+                </div>
+            </Section>
+        )}
+
+            <Section>
+                <ShareReport />
+            </Section>
+        </PageLayout>
+    </>
   );
 };

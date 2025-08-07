@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native'
 import { useAdvancedRealTime } from '@api/src/hooks/useAdvancedRealTime'
 import { getCategoryEmoji } from '@constants';
+import {ExpenseCard} from "./ExpenseCard";
 
 export const ExpenseList: React.FC = () => {
     const {
@@ -112,46 +113,9 @@ export const ExpenseList: React.FC = () => {
                         const isOptimistic = expense.id.startsWith('temp-')
 
                         return (
-                            <TouchableOpacity
-                                key={expense.id}
-                                style={[
-                                    styles.expenseCard,
-                                    isOptimistic && styles.optimisticCard
-                                ]}
-                                onLongPress={() => handleDeleteExpense(expense.id, expense.description)}
-                                disabled={isOptimistic}
-                            >
-                                <View style={styles.expenseHeader}>
-                                    <View style={styles.categoryContainer}>
-                                        <Text style={styles.categoryEmoji}>
-                                            {getCategoryEmoji(expense.category)}
-                                        </Text>
-                                        <Text style={styles.categoryText}>
-                                            {expense.category.charAt(0).toUpperCase() + expense.category.slice(1)}
-                                        </Text>
-                                    </View>
-                                    <View style={styles.amountContainer}>
-                                        <Text style={styles.amount}>${expense.amount.toFixed(2)}</Text>
-                                        {isOptimistic && (
-                                            <ActivityIndicator size="small" color="#007AFF" style={{ marginLeft: 8 }} />
-                                        )}
-                                    </View>
-                                </View>
+                            <TouchableOpacity key={expense.id}>
+                                <ExpenseCard expense={expense} />
 
-                                <Text style={styles.description} numberOfLines={2}>
-                                    {expense.description}
-                                </Text>
-
-                                <View style={styles.expenseFooter}>
-                                    <Text style={styles.date}>
-                                        {formatDate(expense.date)}
-                                    </Text>
-                                    {isOptimistic && (
-                                        <Text style={styles.optimisticLabel}>Syncing...</Text>
-                                    )}
-                                </View>
-
-                                {/* Optimistic overlay */}
                                 {isOptimistic && (
                                     <View style={styles.optimisticOverlay}>
                                         <Text style={styles.optimisticText}>⏳</Text>
