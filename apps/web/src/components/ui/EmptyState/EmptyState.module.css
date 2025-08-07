@@ -1,0 +1,27 @@
+.emptyContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.emptyIcon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.emptyTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1c1c1e;
+}
+
+.emptySubtitle {
+    font-size: 16px;
+    color: #6c757d;
+}

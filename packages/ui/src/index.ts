@@ -1,6 +1,0 @@
-export { AuthForm } from '../../../apps/mobile/src/components/AuthForm'
-export { BaseButton } from './BaseButton'
-export { BaseInput } from './BaseInput'
-export { ExpenseCard } from '../../../apps/mobile/src/components/ExpenseCard'
-export { Dashboard } from '../../../apps/mobile/src/components/Dashboard'
-export { AuthGuard } from '../../../apps/mobile/src/components/AuthGuard'

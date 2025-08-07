@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-
+import './globals.css'
 
 export const metadata: Metadata = {
   title: "Expense Tracker",
   description: "Track your personal expenses with ease",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
-  themeColor: "#007AFF",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -24,9 +22,9 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Expense Tracker" />
+        <meta name="apple-mobile-web-app-title" content="ExpenseItem Tracker" />
       </head>
-      <body className="safe-area-top safe-area-bottom">
+      <body>
         {children}
       </body>
     </html>

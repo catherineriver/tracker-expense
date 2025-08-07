@@ -1,0 +1,22 @@
+.category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: green;
+    border-radius: var(--border-radius);
+    padding: 4px 10px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.categoryIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.categoryName {
+    font-weight: 500;
+}
+

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@ui": ["../../packages/ui/src"],
+      "@utils": ["../../packages/utils/src"],
+      "@api": ["../../packages/api/src"]
+    }
+  },
+  "include": [
+    "**/*",
+    "../../packages/api/src/**/*",
+    "../../packages/ui/src/**/*",
+    "../../packages/utils/src/**/*"
+  ]
+}

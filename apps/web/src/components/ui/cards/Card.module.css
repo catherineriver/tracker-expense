@@ -1,0 +1,27 @@
+.card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--category-color);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.food { --category-color: #FF6B35; }
+.transport { --category-color: #4ECDC4; }
+.entertainment { --category-color: #45B7D1; }
+.shopping { --category-color: #F7DC6F; }
+.bills { --category-color: #BB8FCE; }
+.health { --category-color: #82E0AA; }
+.travel { --category-color: #F1948A; }
+.other { --category-color: #85929E; }
+
+

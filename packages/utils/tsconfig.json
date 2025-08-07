@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@utils": ["../utils/dist"],
+      "@api": ["../api/dist"],
+      "@ui": ["./dist"]
+    }
+  },
+  "include": ["src"]
+}

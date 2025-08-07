@@ -13,7 +13,13 @@
   min-height: 100svh;
   padding: 80px;
   gap: 64px;
-  font-family: var(--font-geist-sans);
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--bottom-navigation-height)
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,10 +38,10 @@
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
+  padding: 16px;
 }
 
 .main ol {
-  font-family: var(--font-geist-mono);
   padding-left: 0;
   margin: 0;
   font-size: 14px;
@@ -127,12 +133,10 @@ a.secondary {
 
 @media (max-width: 600px) {
   .page {
-    padding: 32px;
-    padding-bottom: 80px;
   }
 
   .main {
-    align-items: center;
+
   }
 
   .main ol {

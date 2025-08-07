@@ -3,10 +3,15 @@
   --foreground: #1C1C1E;
   --card-background: #ffffff;
   --border-color: #D1D1D6;
+  --text-secondary: #7F7F7F;
   --primary-color: #007AFF;
   --secondary-color: #8E8E93;
   --error-color: #FF3B30;
   --success-color: #34C759;
+  --border-radius: 16px;
+  --bottom-navigation-height: 50px;
+  --text-primary: #222;
+
 }
 
 * {
@@ -65,21 +70,6 @@ input, textarea, select {
     max-width: 800px;
     padding: 32px;
   }
-}
-
-/* Safe area insets for mobile */
-.safe-area-top {
-  padding-top: env(safe-area-inset-top, 0);
-}
-
-.safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0);
-}
-
-/* Touch-friendly minimum sizes */
-.touch-target {
-  min-height: 48px;
-  min-width: 48px;
 }
 
 /* Card styling */

@@ -11,6 +11,9 @@ importers:
       '@babel/runtime':
         specifier: ^7.28.2
         version: 7.28.2
+      '@supabase/supabase-js':
+        specifier: ^2.53.0
+        version: 2.53.0
       react-native:
         specifier: ^0.79.2
         version: 0.79.5(@babel/core@7.28.0)(react@19.1.1)
@@ -30,12 +33,21 @@ importers:
       '@api':
         specifier: '*'
         version: link:../../packages/api
+      '@constants':
+        specifier: '*'
+        version: link:../../packages/constants
       '@react-native-async-storage/async-storage':
         specifier: ^2.2.0
         version: 2.2.0(react-native@0.79.5)
+      '@react-native-community/netinfo':
+        specifier: ^11.4.1
+        version: 11.4.1(react-native@0.79.5)
       '@react-native-picker/picker':
         specifier: 2.8.1
         version: 2.8.1(react-native@0.79.5)(react@19.0.0)
+      '@supabase/supabase-js':
+        specifier: ^2.53.0
+        version: 2.53.0
       '@ui':
         specifier: '*'
         version: link:../../packages/ui
@@ -79,9 +91,6 @@ importers:
       next:
         specifier: 15.4.5
         version: 15.4.5(@babel/core@7.28.0)(react-dom@19.1.1)(react@19.1.1)
-      next-transpile-modules:
-        specifier: ^10.0.1
-        version: 10.0.1
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -95,6 +104,9 @@ importers:
       '@api':
         specifier: '*'
         version: link:../../packages/api
+      '@constants':
+        specifier: '*'
+        version: link:../../packages/constants
       '@eslint/eslintrc':
         specifier: ^3
         version: 3.3.1
@@ -128,6 +140,12 @@ importers:
       axios:
         specifier: ^1.11.0
         version: 1.11.0
+    devDependencies:
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
+
+  packages/constants:
     devDependencies:
       typescript:
         specifier: ^5.9.2
@@ -1965,6 +1983,14 @@ packages:
       react-native: 0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0)
     dev: false
 
+  /@react-native-community/netinfo@11.4.1(react-native@0.79.5):
+    resolution: {integrity: sha512-B0BYAkghz3Q2V09BF88RA601XursIEA111tnc2JOaN7axJWmNefmfjZqw/KdSxKZp7CZUuPpjBmz/WCR9uaHYg==}
+    peerDependencies:
+      react-native: '>=0.59'
+    dependencies:
+      react-native: 0.79.5(@babel/core@7.28.0)(@types/react@19.0.14)(react@19.0.0)
+    dev: false
+
   /@react-native-picker/picker@2.8.1(react-native@0.79.5)(react@19.0.0):
     resolution: {integrity: sha512-iFhsKQzRh/z3GlmvJWSjJJ4333FdLE/PhXxlGlYllE7sFf+UTzziVY+ajatuJ+R5zDw2AxfJV4v/3tAzUJb0/A==}
     peerDependencies:
@@ -3602,14 +3628,6 @@ packages:
   /encodeurl@2.0.0:
     resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
     engines: {node: '>= 0.8'}
-
-  /enhanced-resolve@5.18.3:
-    resolution: {integrity: sha512-d4lC8xfavMeBjzGr2vECC3fsGXziXZQyJxD868h2M/mBI3PwAuODxAkLkq5HYuvrPYcUtiLzsTo8U3PgX3Ocww==}
-    engines: {node: '>=10.13.0'}
-    dependencies:
-      graceful-fs: 4.2.11
-      tapable: 2.2.2
-    dev: false
 
   /env-editor@0.4.2:
     resolution: {integrity: sha512-ObFo8v4rQJAE59M69QzwloxPZtd33TpYEIjtKD1rrFDcM1Gd7IkDxEBU+HriziN6HSHQnBJi8Dmy+JWkav5HKA==}
@@ -5772,12 +5790,6 @@ packages:
   /nested-error-stacks@2.0.1:
     resolution: {integrity: sha512-SrQrok4CATudVzBS7coSz26QRSmlK9TzzoFbeKfcPBUFPjcQM9Rqvr/DlJkOrwI/0KcgvMub1n1g5Jt9EgRn4A==}
 
-  /next-transpile-modules@10.0.1:
-    resolution: {integrity: sha512-4VX/LCMofxIYAVV58UmD+kr8jQflpLWvas/BQ4Co0qWLWzVh06FoZkECkrX5eEZT6oJFqie6+kfbTA3EZCVtdQ==}
-    dependencies:
-      enhanced-resolve: 5.18.3
-    dev: false
-
   /next@15.4.5(@babel/core@7.28.0)(react-dom@19.1.1)(react@19.1.1):
     resolution: {integrity: sha512-nJ4v+IO9CPmbmcvsPebIoX3Q+S7f6Fu08/dEWu0Ttfa+wVwQRh9epcmsyCPjmL2b8MxC+CkBR97jgDhUUztI3g==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
@@ -7162,11 +7174,6 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
-
-  /tapable@2.2.2:
-    resolution: {integrity: sha512-Re10+NauLTMCudc7T5WLFLAwDhQ0JWdrMK+9B2M8zR5hRExKmsRDCBA7/aV/pNJFltmBFO5BAMlQFi/vq3nKOg==}
-    engines: {node: '>=6'}
-    dev: false
 
   /tar@7.4.3:
     resolution: {integrity: sha512-5S7Va8hKfV7W5U6g3aYxXmlPoZVAwUMy9AOKyF2fVuZa2UD3qZjg578OrLRt8PcNN1PleVaL/5/yYATNL0ICUw==}

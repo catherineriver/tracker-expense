@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "next": "15.4.5",
-    "next-transpile-modules": "^10.0.1",
     "react": "^19.1.1",
     "react-dom": "19.1.1",
     "react-native-web": "^0.21.0"
@@ -19,6 +18,7 @@
     "@ui": "*",
     "@api": "*",
     "@utils": "*",
+    "@constants": "*",
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19.1.9",

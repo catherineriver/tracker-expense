@@ -1,12 +1,16 @@
 'use client'
 
 import React, { useState } from 'react'
-import { AuthGuard } from '../components/AuthGuard'
-import { Navigation, TabBar } from '../components/Navigation'
-import { Dashboard } from '../components/Dashboard'
-import { ExpenseList } from '../components/ExpenseList'
-import { AddExpense } from '../components/AddExpense'
-import { ShareReport } from '../components/ShareReport'
+import { 
+  AuthGuard,
+  Navigation, 
+  TabBar,
+  Dashboard,
+  ExpenseList,
+  AddExpense,
+  ShareReport
+} from '../components'
+import styles from './page.module.css'
 
 type Page = 'dashboard' | 'expenses' | 'add-expense'
 
@@ -14,11 +18,10 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard')
 
   const handleLogout = () => {
-    window.location.reload() // Simple way to reset app state
+    window.location.reload()
   }
 
   const handleExpenseAdded = () => {
-    // Switch to dashboard or expenses page after adding an expense
     setCurrentPage('dashboard')
   }
 
@@ -28,9 +31,6 @@ export default function Home() {
         return (
           <div>
             <Dashboard />
-            <div className="container">
-              <ShareReport />
-            </div>
           </div>
         )
       case 'expenses':
@@ -44,22 +44,18 @@ export default function Home() {
 
   return (
     <AuthGuard>
-      <div style={{ 
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        <Navigation 
+      <div className={styles.container}>
+        <Navigation
           currentPage={currentPage}
           onPageChange={setCurrentPage}
           onLogout={handleLogout}
         />
-        
-        <main style={{ flex: 1, paddingBottom: '80px' }}>
+
+        <main className={styles.main}>
           {renderCurrentPage()}
         </main>
-        
-        <TabBar 
+
+        <TabBar
           currentPage={currentPage}
           onPageChange={setCurrentPage}
         />

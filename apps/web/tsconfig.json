@@ -28,6 +28,7 @@
     "../../packages/ui/src",
     "../../packages/utils/src",
     "src",
+    "src/types/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [

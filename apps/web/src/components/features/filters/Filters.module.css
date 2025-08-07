@@ -1,0 +1,73 @@
+
+.filterCard {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border-color);
+}
+
+.filterTitle {
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.filterGrid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.input, .select {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-family: inherit;
+    background-color: var(--input-background);
+    color: var(--text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus, .select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.clearFiltersContainer {
+    margin-top: 16px;
+}
+
+.clearFiltersButton {
+    font-size: 14px;
+    padding: 8px 16px;
+    min-height: 36px;
+    background-color: var(--card-background);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.clearFiltersButton:hover {
+    background-color: #f8f9fa;
+    border-color: var(--primary-color);
+}
